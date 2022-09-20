@@ -1,65 +1,44 @@
 const { Router } = require("express");
 const axios = require("axios");
-const { getAllRecipes, getRecipeById, postNewRecipe } = require("./utils");
+const { getAllRecipes, postNewRecipe } = require("./utils");
 
 const router = Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res) => {
   try {
     const { name } = req.query;
-    let allRecipes = await getAllRecipes();
+    let info = await getAllRecipes();
 
     if (name) {
-      let recipeByName = await allRecipes.filter((e) =>
-        e.name.toLowerCase().includes(name.toString().toLowerCase())
+      let recipeName = info.filter(
+        (r) => r.name.toLowerCase() === name.toLowerCase()
       );
-
-      if (recipeByName.length) {
-        let recipes = recipeByName.map((e) => {
-          return {
-            id: e.id,
-            name: e.name,
-            summary: e.summary,
-            diets: e.diets,
-            healthScore: e.healthScore,
-            image: e.image,
-            steps: e.steps,
-          };
-        });
-        return res.status(200).send(recipes);
-      }
-      return res.status(404).send("Sorry, recipe not found");
+      recipeName.length
+        ? res.status(200).send(recipeName)
+        : res.status(404).send("No existe esa receta");
     } else {
-      let recipes = allRecipes.map((e) => {
-        return {
-          id: e.id,
-          name: e.name,
-          summary: e.summary,
-          diets: e.diets,
-          healthScore: e.healthScore,
-          image: e.image,
-          steps: e.steps,
-        };
-      });
-      return res.status(200).send(recipes);
+      res.status(200).send(info);
     }
-  } catch {
-    return res.status(400).send("invalid input");
+  } catch (error) {
+    console.log("Error en ruta getQueryName", error);
   }
 });
 
-//-----------------------------------------------------------------
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const infoApi = await getRecipeById(id);
-    res.status(200).send(infoApi);
+    const infoApi = await getAllRecipes();
+    if (id) {
+      const recipeById = infoApi.find((recipe) => recipe.id == id);
+      recipeById
+        ? res.status(200).json(recipeById)
+        : res.status(404).json("No se encontró detalle de la receta");
+    }
   } catch (error) {
     res.status(404).json("Error en ruta getId Recipe", error);
   }
 });
 
-//------------------------------------------------------------------------------------
 router.post("/", async (req, res) => {
   const objRecipe = req.body;
   try {

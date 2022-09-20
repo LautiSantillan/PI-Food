@@ -23,11 +23,15 @@ const getInfoRecipe = async () => {
         diets: recipe.diets,
         image: recipe.image,
         steps: aux,
+        // recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps
+        //   ? recipe.analyzedInstructions[0].steps.map((e) => e.step).join("| ")
+        //   : "No hay pasos",
       };
     });
-    infoRecipe.forEach(async (e) => {
-      await postNewRecipe(e);
-    });
+    // infoRecipe.forEach(async (e) => {
+    //   await postNewRecipe(e);
+    // });
+    return infoRecipe;
   } catch (error) {
     console.log("Error en getInfoRecipe", error);
   }
@@ -52,8 +56,9 @@ const getInfoRecipeDB = async () => {
 
 const getAllRecipes = async () => {
   try {
+    const infoApi = await getInfoRecipe();
     const dataDB = await getInfoRecipeDB();
-    const allRecipes = [...dataDB];
+    const allRecipes = [...infoApi, ...dataDB];
     return allRecipes;
   } catch (error) {
     console.error(error);
@@ -62,34 +67,32 @@ const getAllRecipes = async () => {
 
 //-----------------------FUNCIONES PARA RUTAS DE RECETAS----------------------------------------------
 
-const getRecipeById = async (id) => {
-  try {
-    const infoApi = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?apiKey=913ca4904af6441b8f082e172df13bdd`
-    );
-    const data = [];
-    data.push(infoApi.data);
-    const infoRecipe = data?.map((recipe) => {
-      return {
-        id: recipe.id,
-        name: recipe.title,
-        summary: recipe.summary,
-        healthScore: recipe.healthScore,
-        diets: recipe.diets,
-        image: recipe.image,
-        steps: recipe.analyzedInstructions[0]?.steps.map((e) => {
-          return {
-            number: e.number,
-            step: e.step,
-          };
-        }),
-      };
-    });
-    return infoRecipe;
-  } catch (error) {
-    console.log("Error en getRecipeById", error);
-  }
-};
+// const getRecipeById = async (id) => {
+//   try {
+//     const infoApi = await axios.get(
+//       `https://api.spoonacular.com/recipes/${id}/information?apiKey=913ca4904af6441b8f082e172df13bdd&number=10`
+//     );
+//     const data = [];
+//     data.push(infoApi.data);
+//     const infoRecipe = data?.map((recipe) => {
+//       return {
+//         id: recipe.id,
+//         name: recipe.title,
+//         summary: recipe.summary,
+//         healthScore: recipe.healthScore,
+//         diets: recipe.diets,
+//         image: recipe.image,
+//         steps:
+//           recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps
+//             ? recipe.analyzedInstructions[0].steps.map((e) => e.step).join("| ")
+//             : "No hay pasos",
+//       };
+//     });
+//     return infoRecipe;
+//   } catch (error) {
+//     console.log("Error en getRecipeById", error);
+//   }
+// };
 
 const postNewRecipe = async (objRecipe) => {
   try {
@@ -137,8 +140,6 @@ const createDietsDB = async () => {
         where: { name: e },
       });
     });
-    const diets = await Diet.findAll();
-    return diets;
   } catch (error) {
     console.log("Error en createDietsDB", error);
   }
@@ -146,16 +147,8 @@ const createDietsDB = async () => {
 
 const getInfoDietsDB = async () => {
   try {
-    const dataDB = await Diet.findAll({
-      include: {
-        model: Recipe,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
-      },
-    });
-    return dataDB;
+    const diets = await Diet.findAll();
+    return diets;
   } catch (error) {
     console.error("Error en getInfoDietsDB", error);
   }
@@ -164,7 +157,7 @@ const getInfoDietsDB = async () => {
 module.exports = {
   getInfoRecipe,
   getAllRecipes,
-  getRecipeById,
+  //getRecipeById,
   postNewRecipe,
   createDietsDB,
   getInfoDietsDB,

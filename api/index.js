@@ -19,11 +19,10 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-const { createDietsDB, getInfoRecipe } = require("./src/routes/utils");
+const { createDietsDB } = require("./src/routes/utils");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  getInfoRecipe();
   createDietsDB();
   server.listen(3001, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console

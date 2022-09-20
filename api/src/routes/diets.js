@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const axios = require("axios");
-const { getInfoDiets, getInfoDietsDB, getAllDiets } = require("./utils");
+const { getInfoDietsDB } = require("./utils");
 
 const router = Router();
 
