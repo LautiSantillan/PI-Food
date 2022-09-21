@@ -8,7 +8,7 @@ const { API_KEY } = process.env;
 const getInfoRecipe = async () => {
   try {
     const infoApi = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=10&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
     );
     const data = infoApi.data.results;
     const infoRecipe = data?.map((recipe) => {
@@ -26,9 +26,6 @@ const getInfoRecipe = async () => {
         steps: aux,
       };
     });
-    // infoRecipe.forEach(async (e) => {
-    //   await postNewRecipe(e);
-    // });
     return infoRecipe;
   } catch (error) {
     console.log("Error en getInfoRecipe", error);
@@ -128,7 +125,6 @@ const getInfoDietsDB = async () => {
 module.exports = {
   getInfoRecipe,
   getAllRecipes,
-  //getRecipeById,
   postNewRecipe,
   createDietsDB,
   getInfoDietsDB,
