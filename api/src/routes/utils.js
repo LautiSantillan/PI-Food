@@ -1,13 +1,14 @@
 const axios = require("axios");
 
 const { Recipe, Diet } = require("../db");
+const { API_KEY } = process.env;
 
 //-----------------------FUNCIONES DE BASE DE DATOS----------------------------------------------
 
 const getInfoRecipe = async () => {
   try {
     const infoApi = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=913ca4904af6441b8f082e172df13bdd&number=10&addRecipeInformation=true`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=10&addRecipeInformation=true`
     );
     const data = infoApi.data.results;
     const infoRecipe = data?.map((recipe) => {
@@ -23,9 +24,6 @@ const getInfoRecipe = async () => {
         diets: recipe.diets,
         image: recipe.image,
         steps: aux,
-        // recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps
-        //   ? recipe.analyzedInstructions[0].steps.map((e) => e.step).join("| ")
-        //   : "No hay pasos",
       };
     });
     // infoRecipe.forEach(async (e) => {
@@ -66,33 +64,6 @@ const getAllRecipes = async () => {
 };
 
 //-----------------------FUNCIONES PARA RUTAS DE RECETAS----------------------------------------------
-
-// const getRecipeById = async (id) => {
-//   try {
-//     const infoApi = await axios.get(
-//       `https://api.spoonacular.com/recipes/${id}/information?apiKey=913ca4904af6441b8f082e172df13bdd&number=10`
-//     );
-//     const data = [];
-//     data.push(infoApi.data);
-//     const infoRecipe = data?.map((recipe) => {
-//       return {
-//         id: recipe.id,
-//         name: recipe.title,
-//         summary: recipe.summary,
-//         healthScore: recipe.healthScore,
-//         diets: recipe.diets,
-//         image: recipe.image,
-//         steps:
-//           recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps
-//             ? recipe.analyzedInstructions[0].steps.map((e) => e.step).join("| ")
-//             : "No hay pasos",
-//       };
-//     });
-//     return infoRecipe;
-//   } catch (error) {
-//     console.log("Error en getRecipeById", error);
-//   }
-// };
 
 const postNewRecipe = async (objRecipe) => {
   try {
