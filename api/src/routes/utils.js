@@ -37,7 +37,7 @@ const getInfoRecipe = async () => {
 
 const getInfoRecipeDB = async () => {
   try {
-    const dataDB = await Recipe.findAll({
+    const dbInfo = await Recipe.findAll({
       include: {
         model: Diet,
         attributes: ["name"],
@@ -46,9 +46,13 @@ const getInfoRecipeDB = async () => {
         },
       },
     });
-    return dataDB;
+
+    var dato = JSON.parse(JSON.stringify(dbInfo, null, 2));
+    dato.forEach((el) => (el.diets = el.diets.map((el) => el.name)));
+
+    return dato;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
@@ -99,10 +103,10 @@ const createDietsDB = async () => {
       "ovo vegetarian",
       "lacto ovo vegetarian",
       "vegan",
-      "pescetarian",
+      "pescatarian",
       "paleolithic",
       "primal",
-      "low fodmap",
+      "fodmap friendly",
       "whole 30",
       "dairy free",
     ];
