@@ -1,15 +1,18 @@
 import {
   GET_RECIPES,
+  GET_RECIPE_BY_NAME,
+  GET_RECIPE_DETAIL,
+  GET_DIETS_TYPES,
+  POST_RECIPE,
   FILTER_DIET_TYPE,
   ORDER_ALPHABETICAL,
   ORDER_BY_HEALTHSCORE,
-  GET_RECIPE_BY_NAME,
 } from "../actions/index";
 
 const initialState = {
   recipes: [],
   allRecipes: [], //es una propiedad de respaldo
-  dietsTypes: [],
+  diets: [],
   recipeDetail: [],
 };
 
@@ -21,22 +24,45 @@ function rootReducer(state = initialState, action) {
         recipes: action.payload,
         allRecipes: action.payload,
       };
+
     case GET_RECIPE_BY_NAME:
       return {
         ...state,
         recipes: action.payload,
       };
+
+    case GET_RECIPE_DETAIL:
+      return {
+        ...state,
+        recipeDetail: action.payload,
+      };
+
+    case GET_DIETS_TYPES:
+      return {
+        ...state,
+        diets: action.payload,
+      };
+
+    case POST_RECIPE:
+      return {
+        ...state,
+      };
+
     case FILTER_DIET_TYPE:
       const allRecipes = state.allRecipes;
+      // const dietsFiltered = allRecipes.filter((recipe) =>
+      //   recipe.diets?.some(
+      //     (d) => d.toLowerCase() === action.payload.toLowerCase()
+      //   )
+      // );
       const dietsFiltered = allRecipes.filter((recipe) =>
-        recipe.diets?.some(
-          (d) => d.toLowerCase() === action.payload.toLowerCase()
-        )
+        recipe.diets?.includes(action.payload)
       );
       return {
         ...state,
         recipes: dietsFiltered,
       };
+
     case ORDER_ALPHABETICAL: {
       const allRecipes = [...state.recipes];
       const orderAlphabetical =
@@ -56,6 +82,7 @@ function rootReducer(state = initialState, action) {
         recipes: orderAlphabetical,
       };
     }
+
     case ORDER_BY_HEALTHSCORE:
       const allRecipes2 = [...state.recipes];
       const orderHealthScore =
@@ -74,6 +101,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         recipes: orderHealthScore,
       };
+
     default:
       return state;
   }

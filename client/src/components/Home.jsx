@@ -13,7 +13,7 @@ export default function Home (){
     const dispatch = useDispatch()
     const allRecipes = useSelector((state) => state.recipes)
 
-     const [order, setOrder] = useState('')
+    //  const [order, setOrder] = useState('')
 
     //PAGINADO------------------------------------------------------------------
 
@@ -52,34 +52,34 @@ export default function Home (){
       e.preventDefault()
       dispatch(orderAlphabetical(e.target.value))
       setActualPage(1)
-      setOrder(`Order ${e.target.value}`);
+      // setOrder(`Order ${e.target.value}`);
     }
 
     const handleHealthScore = (e)=>{
        e.preventDefault()
       dispatch(orderByHealthScore(e.target.value))
       setActualPage(1)
-      setOrder(`Order ${e.target.value}`);
+      // setOrder(`Order ${e.target.value}`);
     }
 
     return (
         <div className="Home">
-            <Link to={"/recipes"}>Crear receta</Link>
+            <Link to={"/recipes"}>Create Recipe</Link>
             <h1>Recipes List</h1>
             <button onClick={handleClick}>Clear Filters</button>
             <SearchBar/>
             <div>
-              <select className="select-Home" onChange={(e)=>handleOrderAlphabetical(e)}>
+              <select className="select-Home" name="alphabetical" onChange={(e)=>handleOrderAlphabetical(e)}>
                 <option disabled selected>Alphabetical</option>
                 <option value="atoz">A to Z</option>
                 <option value="ztoa">Z to A</option>
               </select>
-              <select className="select-Home" onChange={(e)=>handleHealthScore(e)}>
+              <select className="select-Home" name="numerical" onChange={(e)=>handleHealthScore(e)}>
                 <option disabled selected>Health Score</option>
                 <option value="asc">From Min to Max</option>
                 <option value="desc">From Max to Min</option>
                </select>
-               <select className="select-Home" onChange={(e)=>handleFilterDietType(e)}>
+               <select className="select-Home" name="diets" onChange={(e)=>handleFilterDietType(e)}>
                  <option disabled selected>Select...</option>
                  <option value="gluten free">Gluten Free</option>
                  <option value="ketogenic">Ketogenic</option>

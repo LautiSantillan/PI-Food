@@ -2,9 +2,12 @@ import axios from "axios";
 
 export const GET_RECIPES = "GET_RECIPES";
 export const GET_RECIPE_BY_NAME = "GET_RECIPE_BY_NAME";
+export const GET_DIETS_TYPES = "GET_DIETS_TYPES";
+export const POST_RECIPE = "POST_RECIPE";
 export const FILTER_DIET_TYPE = "FILTER_DIET_TYPE";
 export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
+export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -20,6 +23,7 @@ export function getRecipes() {
   };
 }
 
+//--------------SEARCH BAR-----------------------------
 export function getRecipeByName(name) {
   return async function (dispatch) {
     try {
@@ -36,12 +40,63 @@ export function getRecipeByName(name) {
   };
 }
 
+export function getRecipeDetail(id) {
+  return async function (dispatch) {
+    try {
+      const recipeDetail = await axios.get(
+        `http://localhost:3001/recipes/${id}`
+      );
+      return dispatch({
+        type: GET_RECIPE_DETAIL,
+        payload: recipeDetail.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+//----------------FORMULARIO-------------------------------------------
+export function getDietsTypes() {
+  return async function (dispatch) {
+    try {
+      const dietsTypes = await axios.get("http://localhost:3001/diets");
+      return dispatch({
+        type: GET_DIETS_TYPES,
+        // payload: dietsTypes.data.map((d) => d.name),
+        payload: dietsTypes.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function postRecipe(payload) {
+  return async function () {
+    try {
+      const newRecipe = await axios.post(
+        "http://localhost:3001/recipes",
+        payload
+      );
+      console.log(newRecipe);
+      return newRecipe;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+//-----------------------------FILTRADO----------------------------------------
+
 export function filterDietType(payload) {
   return {
     type: FILTER_DIET_TYPE,
     payload,
   };
 }
+
+//---------------------------ORDENAMIENTO----------------------------------------
 
 export function orderAlphabetical(payload) {
   return {
