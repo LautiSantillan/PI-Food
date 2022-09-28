@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const infoApi = await getInfoDietsDB();
     res.status(200).send(infoApi);
   } catch (error) {
-    res.status(404).json("Error en ruta get Diet", error);
+    res.status(404).json("Error in route get Diet", error);
   }
 });
 

@@ -15,12 +15,12 @@ router.get("/", async (req, res) => {
       );
       recipeName.length
         ? res.status(200).send(recipeName)
-        : res.status(404).send("No existe esa receta");
+        : res.status(404).send("Recipe not found");
     } else {
       res.status(200).send(info);
     }
   } catch (error) {
-    console.log("Error en ruta getQueryName", error);
+    console.log("Error in route getQueryName", error);
   }
 });
 
@@ -32,10 +32,10 @@ router.get("/:id", async (req, res) => {
       const recipeById = infoApi.find((recipe) => recipe.id == id);
       recipeById
         ? res.status(200).json(recipeById)
-        : res.status(404).json("No se encontró detalle de la receta");
+        : res.status(404).json("No recipe detail found");
     }
   } catch (error) {
-    res.status(404).json("Error en ruta getId Recipe", error);
+    res.status(404).json("Error in route getId Recipe", error);
   }
 });
 
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
     const postRecipe = await postNewRecipe(objRecipe);
     res.status(201).json(postRecipe);
   } catch (error) {
-    res.status(404).json("Error en ruta post Recipe", error);
+    res.status(404).json("Error in route post Recipe", error);
   }
 });
 
