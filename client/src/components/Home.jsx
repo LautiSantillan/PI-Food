@@ -14,7 +14,7 @@ export default function Home (){
     const dispatch = useDispatch()
     const allRecipes = useSelector((state) => state.recipes)
 
-     const [order, setOrder] = useState('')
+    //  const [order, setOrder] = useState('')
 
     //PAGINADO------------------------------------------------------------------
 
@@ -53,14 +53,14 @@ export default function Home (){
       e.preventDefault()
       dispatch(orderAlphabetical(e.target.value))
       setActualPage(1)
-      setOrder(`Order ${e.target.value}`);
+      // setOrder(`Order ${e.target.value}`);
     }
 
     const handleHealthScore = (e)=>{
        e.preventDefault()
       dispatch(orderByHealthScore(e.target.value))
       setActualPage(1)
-      setOrder(`Order ${e.target.value}`);
+      // setOrder(`Order ${e.target.value}`);
     }
 
     return (
