@@ -1,50 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./styles/Recipe.module.css"
 
-export default function Recipe ({image, name, diets}){
+export default function Recipe ({image, name, diets, id}){
     return (
-        <div>
-             <img src={image} alt="Receta" />
-             <h1>{name}</h1>
-             <div>
-               {diets?.map((d, i) => (
-                 <div key={i}>
-                   <p>{d}</p>
-                 </div>
+        <div id={styles.cardRecipe}>
+             <img src={image} alt="Receta" width="300px" id={styles.image}/>
+             <h3>{name}</h3>
+             <div id={styles.diets_div}>
+               <div id={styles.diets}>
+                <p id={styles.p}>Diets:</p>
+                {diets?.map((d) => (
+                 <span>{d}</span>
                 ))}
+               </div>
+             <Link to={`/home/${id}`}>
+               <button id={styles.button}>See details</button>
+            </Link>
             </div>
         </div>
     )
-
-// let prevId = 1;
-
-//     export default function Recipe (recipes){
-      
-//       const {image, name, diets} = recipes
-//       return (
-//         <div>
-//              <img src={image} alt="Receta" />
-//              <h1>{name}</h1>
-//              <div className="dietcointainer">
-//                 {diets?.map(e => {
-//                     return (
-//                         <h5 className="diets" key={prevId++}>{typeof(e)}</h5>
-//                     )
-//                 })}            
-//             </div>
-//         </div>
-//     )
-
-//  export default function Recipe (recipes){
-      
-//       const {image, name, diets} = recipes
-//       return (
-//         <div>
-//              <img src={image} alt="Receta" />
-//              <h1>{name}</h1>
-//              <h5>{diets.map((d)=>{
-//               return typeof(d)
-//              })}</h5>    
-
-//         </div>
-//     )
 }

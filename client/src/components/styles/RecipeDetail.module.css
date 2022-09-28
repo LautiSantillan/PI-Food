@@ -1,0 +1,95 @@
+#recipeDetail{
+    background-image: url("../../images/Background-Home.jpg");
+        background-size: 100% 100%;
+        /* Escala la imagen al mayor tamaño posible sin estirarla.  */
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100vw;
+        height: 100vh;
+        background-attachment: fixed;
+        overflow: auto;
+        margin: 0%;
+}
+
+
+
+#detailCard {
+    margin-top: 70px;
+    margin-right: 5px;
+    margin-left: 280px;
+    width: 800px;
+    /* background: rgba(0, 61, 71, 0.363); */
+    background-color:rgba(207, 122, 24, 0.8);
+    border-radius: 5px;
+    border: solid rgb(231, 224, 224) 2px;
+    box-shadow: 0 0 4px #000000a8;
+    transition: all 400ms ease;
+    text-align: center;
+    justify-content: center;
+}
+
+#title{
+   display: inline-flex;
+   justify-content: center;
+}
+
+#span{
+    margin-left: 15px;
+}
+
+#detailCard:hover {
+    box-shadow: 5 5 20px #000000a8;
+    transform: translateY(-3%);
+}
+
+#button {
+    min-width: 130px;
+    height: 40px;
+    color: rgb(0, 0, 0);
+    padding: 3px 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid rgba(5, 5, 5, 0.84);
+    background: rgba(255, 236, 236, 0.8);
+    margin-bottom: 10px;
+    margin-left: 25px;
+}
+
+
+#loading {
+    display: flex;
+    margin-top: 10rem;
+    margin-left: 41em;
+    margin-bottom: 10em;
+}
+
+#dot {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 50%;
+    animation: wavy 0.4s ease-in infinite alternate;
+}
+
+#dot:not(:last-child) {
+    margin-right: 10px;
+}
+
+@keyframes wavy {
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+#dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+#dot:not(:last-child) {
+    animation-delay: 0.4s;
+}

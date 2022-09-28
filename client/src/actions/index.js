@@ -2,12 +2,12 @@ import axios from "axios";
 
 export const GET_RECIPES = "GET_RECIPES";
 export const GET_RECIPE_BY_NAME = "GET_RECIPE_BY_NAME";
+export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL";
 export const GET_DIETS_TYPES = "GET_DIETS_TYPES";
 export const POST_RECIPE = "POST_RECIPE";
 export const FILTER_DIET_TYPE = "FILTER_DIET_TYPE";
 export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
-export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -63,7 +63,6 @@ export function getDietsTypes() {
       const dietsTypes = await axios.get("http://localhost:3001/diets");
       return dispatch({
         type: GET_DIETS_TYPES,
-        // payload: dietsTypes.data.map((d) => d.name),
         payload: dietsTypes.data,
       });
     } catch (error) {
@@ -79,7 +78,6 @@ export function postRecipe(payload) {
         "http://localhost:3001/recipes",
         payload
       );
-      console.log(newRecipe);
       return newRecipe;
     } catch (error) {
       console.log(error);

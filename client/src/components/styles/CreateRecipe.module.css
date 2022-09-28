@@ -1,0 +1,113 @@
+#createRecipe {
+background-image: url("../../images/Background-Home.jpg");
+    background-size: 100% 100%;
+    /* Escala la imagen al mayor tamaño posible sin estirarla.  */
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    background-attachment: fixed;
+    overflow: auto;
+    margin: 0%;
+    color: white;
+}
+
+#form {
+    margin: 0% auto;
+    /* Centramos el formulario */
+    width: 300px;
+    /* Sin ancho no podemos centrar el formulario */
+    padding: 30px;
+    justify-content: center;
+}
+
+#input {
+    border-radius: 10px;
+    padding: 8px;
+    color: rgb(0, 0, 0);
+    /* background-color: rgba(105, 1, 1, 0.529); */
+    background-color: rgba(207, 122, 24, 0.8);
+    border-color: rgba(0, 140, 255, 0.66);
+    border: 2px;
+}
+
+#label {
+    color: white;
+    font-size: medium;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 30px;
+    display: block;
+    /* Ahora los inputs quedan debajo de los label */
+    padding: 3px;
+    /* Separando espacios internos */
+}
+
+#selectForm {
+    position: relative;
+    border: 2px solid rgba(0, 0, 0, 0.84);
+    border-radius: 10px;
+    width: 120px;
+    height: 30px;
+    overflow: hidden;
+    background-color: rgba(255, 236, 236, 0.8);
+    margin-left: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+#buttonForm {
+    min-width: 130px;
+    height: 40px;
+    color: rgb(0, 0, 0);
+    padding: 3px 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid rgba(5, 5, 5, 0.84);
+    background: rgba(255, 236, 236, 0.8);
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#buttonBack {
+    min-width: 130px;
+    height: 40px;
+    color: rgb(0, 0, 0);
+    padding: 3px 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid rgba(5, 5, 5, 0.84);
+    background: rgba(255, 236, 236, 0.8);
+    margin-bottom: 10px;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+
+#h1 {
+    font-size: 40px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(66, 16, 7);
+    background: rgba(255, 236, 236, 0.8);
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.84);
+    position: relative;
+    outline: none;
+    width: 11em;
+    height: 55px;
+    margin-left: 450px;
+    justify-content: center;
+}
+
+#FormP{
+    color: red;
+}

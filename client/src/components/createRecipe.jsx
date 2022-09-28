@@ -3,20 +3,20 @@ import {Link, useHistory} from "react-router-dom"
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux"
 import {getDietsTypes, postRecipe } from "../actions/index"
-import "./styles/CreateRecipe.css"
+import styles from "./styles/CreateRecipe.module.css"
 
 export default function CreateRecipe(){
   const dispatch = useDispatch()
   const history = useHistory()
+  let recipes = useSelector(state => state.recipes)
   const dietsTypes = useSelector(state => state.diets)
-
-  const [errors, setErrors] = useState({})
 
   const [input, setInput] = useState({
     name:"",
     summary:"",
-    healthScore:0,
+    healthScore:"",
     steps:"",
+    image:"",
     diets:[]
   })
 
@@ -26,169 +26,114 @@ export default function CreateRecipe(){
   }, [dispatch])
 
 
-const validate = (input)=>{
-  let errors = {}
-  if(!input.name){
-    errors.name = 'Please complete with a recipe name'
-  } else if (!input.summary){
-    errors.summary = 'Please add some comments about your recipe'
-  } else if (input.healthScore < 1 || input.healthScore > 100 ){
-    errors.healthScore = 'The score must be a number between 1 and 100'
-  } else if (!input.steps.length){
-    errors.steps = 'Please detail the steps for your recipe'
-  }  else if (!input.diets.length){
-    errors.diets = 'You must select at least one diet type'
-  }
-  return errors
-}
-
-
-
   const handleChange = (e)=>{
     setInput({
       ...input,
       [e.target.name]: e.target.value
     })
-    setErrors(validate({
-      ...input,
-      [e.target.name]: e.target.value
-    }))
   }
 
-
-  const handleCheck = (e)=>{
-    if(e.target.checked){
+    const handleSelect = (e)=>{
       setInput({
         ...input,
-        diets: [...input.diets, e.target.value]
+        diets: [...new Set ([...input.diets, e.target.value])]
       })
-    } else {
-      const diets = input.diets.filter(diet =>{
-        return diet !== e.target.value
-      })
-      setInput({
-        ...input,
-        diets: diets
-      })
-    }
     console.log(input.diets)
   }
 
-  // const handleCheck = (e)=>{
-  //   if(e.target.checked){
-  //    const arr = [e.target.value]
-  //    return setInput([...arr])
-  //   }
-  //   let arr2 = diet.filter(el => el !== e.target.value)
-  //   setInput(arr2)
-  // }
 
-  
-    // const handleCheck = (e)=> {
-    //   e.preventDefault()
-       
-    //     let newArray = input.diets;
-    //     let find = newArray.indexOf(e.target.value);
-        
-    //     if (find >= 0) {
-    //         newArray.splice(find, 1)
-    //     } else {
-    //         newArray.push(e.target.value)
-    //     }
-        
-    //     setInput({
-    //         ...input,
-    //         diets: newArray
-    //     });
-
-        
-    // }
-
-    const handleSubmit = (e)=>{
-    e.preventDefault()
-    dispatch(postRecipe(input))
-    alert("Recipe created")
+  const handleDeleteDiets = (e) => {
     setInput({
-    name:"",
-    summary:"",
-    healthScore:0,
-    steps:"",
-    diets:[]
-  })
-  history.push("/home")
+      ...input,
+      diets: input.diets.filter((el) => el !== e),
+    });
+  };
+
+
+  let validateUrl = /(http(s?):)([/|.|\w|\s|-])*.(?:jpg|gif|png)/;
+
+  const handleSubmit = (e)=>{
+   e.preventDefault();
+    if (input.name.trim() || input.name === 'number') {
+      return alert("Enter correct a name");
+    } 
+    else if (
+      recipes.find(
+        (e) => e.name.toLowerCase().trim() === input.name.toLocaleLowerCase().trim()
+      )
+    ) {
+      return alert(`The name ${input.name} already exists`);
+    } else if (input.summary.trim() === "") {
+      return alert("Please add a summary");
+    } else if (input.healthScore === "" || input.healthScore < 1 || input.healthScore > 100) {
+      return alert("The value must be between 1 and 100");
+    } else if (input.steps.length === 0) {
+      return alert("Please add the steps");
+    }  else if (input.image && !validateUrl.test(input.image)) {
+      return alert("This is not a valid URL"); 
+     } else if (input.diets.length === 0) {
+      return alert("Please add one o more diets");
+    } else {
+      dispatch(postRecipe(input));
+      alert("Recipe created");
+      setInput({
+       name:"",
+       summary:"",
+       healthScore:"",
+       steps:"",
+       image:"",
+       diets:[]
+      });
+      history.push("/home");
+    }
   }
 
 
   return (
-    <div>
+    <div id={styles.createRecipe}>
       <Link to={"/home"}>
-        <button>Back</button>
+        <button id={styles.buttonBack}>Back</button>
       </Link>
-      <h1>Create your recipe!</h1>
-      <form onSubmit={(e)=>handleSubmit(e)}>
+      <h1 id={styles.h1}>Create your recipe!</h1>
+      <form id={styles.form} onSubmit={(e)=>handleSubmit(e)}>
         <div>
-          <label>Name: </label>
-          <input type="text" value={input.name} name="name" onChange={(e)=>handleChange(e)}/>
-          {errors.name && (
-            <p>{errors.name}</p>
-          )}
+          <label id={styles.label}>Name: </label>
+          <input id={styles.input} type="text" value={input.name} name="name" onChange={(e)=>handleChange(e)}/>
         </div>
         <div>
-          <label>Summary: </label>
-           <textarea type="text" value={input.summary} name="summary" onChange={(e)=>handleChange(e)}></textarea>
-           {errors.summary && (
-            <p>{errors.summary}</p>
-          )}
+          <label id={styles.label}>Summary: </label>
+           <textarea id={styles.input} type="text" value={input.summary} name="summary" onChange={(e)=>handleChange(e)}></textarea>
         </div>
         <div>
-          <label>Health Score: </label>
-          <input type="number" value={input.healthScore} name="healthScore" onChange={(e)=>handleChange(e)}/>
-          {errors.healthScore && (
-            <p>{errors.healthScore}</p>
-          )}
+          <label id={styles.label}>Health Score: </label>
+          <input id={styles.input} type="number"  value={input.healthScore} name="healthScore" onChange={(e)=>handleChange(e)}/>
         </div>
         <div>
-          <label>Steps: </label>
-          <textarea type="text" value={input.steps} name="steps" onChange={(e)=>handleChange(e)}></textarea>
-           {errors.steps && (
-            <p>{errors.steps}</p>
-          )}
+          <label id={styles.label}>Steps: </label>
+          <textarea id={styles.input} type="text" value={input.steps} name="steps" onChange={(e)=>handleChange(e)}></textarea>
         </div>
-        {/* <div>
-          <label>Diet Types: </label>
-         {dietsTypes.map(d =>{
-                            return (
-                                <div key={d.id} className="checks">
-                                    <label className="dietTypes">{d.name}</label>
-                                    <input className="checks" type="checkbox" name={d.name} value={d.name} selected={dietsTypes?.includes(d.name)} onChange={e => handleCheck(e)}/>
-                                </div>
-                            )
-                        })}
-        </div> */}
-        {/* <div>
-          <label>Diet Types: </label>
-         {listDiets.map(d =>{
-                            return (
-                                <div key={d} className="checks">
-                                    <label className="dietTypes">{d}</label>
-                                    <input className="checks" type="checkbox" name={d} value={d} selected={input.diets?.includes(d)} onChange={e => handleCheck(e)}/>
-                                </div>
-                            )
-                        })}
-        </div> */}
         <div>
-          <label >Diets: </label>
-         {dietsTypes?.map((d)=>{
-          return <label key={d.id}>
-            <input type="checkbox" name={d.name} value={d.name} onChange={(e)=>handleCheck(e)}/>
-            {d.name}
-          </label>
-         })}
-          {errors.diets && (
-            <p>{errors.diets}</p>
-          )}
+          <label id={styles.label} >Image: </label>
+          <input id={styles.input} type="text" value={input.image} name="image" onChange={(e)=>handleChange(e)}></input>
         </div>
-        <button type="submit">Create Recipe</button>
+        <div>
+            <label id={styles.label}>Diets: </label>
+          <select id={styles.selectForm} onChange={(e)=>handleSelect(e)}>
+            <option disabled selected>Select diets...</option>
+            {dietsTypes?.map((d)=>(
+              <option value={d.name} key={d.id}>{d.name}</option>
+            ))}
+         </select>
+         <ul>
+            {input.diets.map((d) => (
+              <div key={d}>
+                  <div>{d + ""}</div>
+                <button value={d} onClick={() => handleDeleteDiets(d)}>x </button>
+              </div>
+            ))}
+          </ul>
+        </div>
+         <button id={styles.buttonForm} type="submit">Create Recipe</button>
       </form>
     </div>
   )

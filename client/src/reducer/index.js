@@ -50,11 +50,6 @@ function rootReducer(state = initialState, action) {
 
     case FILTER_DIET_TYPE:
       const allRecipes = state.allRecipes;
-      // const dietsFiltered = allRecipes.filter((recipe) =>
-      //   recipe.diets?.some(
-      //     (d) => d.toLowerCase() === action.payload.toLowerCase()
-      //   )
-      // );
       const dietsFiltered = allRecipes.filter((recipe) =>
         recipe.diets?.includes(action.payload)
       );

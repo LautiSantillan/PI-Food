@@ -5,15 +5,16 @@ import { getRecipes, filterDietType, orderAlphabetical, orderByHealthScore} from
 import { Link } from "react-router-dom";
 import Recipe from "../components/Recipe"
 import Paginado from "./Paginado";
-import "./styles/Home.css"
+import styles from "./styles/Home.module.css"
 import SearchBar from "./SearchBar";
+import img from "../images/recipe-tittle.png"
 
 
 export default function Home (){
     const dispatch = useDispatch()
     const allRecipes = useSelector((state) => state.recipes)
 
-    //  const [order, setOrder] = useState('')
+     const [order, setOrder] = useState('')
 
     //PAGINADO------------------------------------------------------------------
 
@@ -52,35 +53,39 @@ export default function Home (){
       e.preventDefault()
       dispatch(orderAlphabetical(e.target.value))
       setActualPage(1)
-      // setOrder(`Order ${e.target.value}`);
+      setOrder(`Order ${e.target.value}`);
     }
 
     const handleHealthScore = (e)=>{
        e.preventDefault()
       dispatch(orderByHealthScore(e.target.value))
       setActualPage(1)
-      // setOrder(`Order ${e.target.value}`);
+      setOrder(`Order ${e.target.value}`);
     }
 
     return (
-        <div className="Home">
-            <Link to={"/recipes"}>Create Recipe</Link>
-            <h1>Recipes List</h1>
-            <button onClick={handleClick}>Clear Filters</button>
+        <div id={styles.Home}>
+           <div id={styles.div_h1}>
+                 <h1 id ={styles.h1}>Recipes</h1>
+                 <img id={styles.img} src={img} alt="Recipe" width="50px" height="50px"/>
+                </div>
+            <Link to={"/recipes"}> <button id={styles.buttonCreate}>Create Recipe</button> </Link>
+            <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button>
             <SearchBar/>
             <div>
-              <select className="select-Home" name="alphabetical" onChange={(e)=>handleOrderAlphabetical(e)}>
-                <option disabled selected>Alphabetical</option>
+              <div id={styles.div_Select}>
+                <select id={styles.select_Home} name="alphabetical" onChange={(e)=>handleOrderAlphabetical(e)}>
+                <option disabled selected>Alphabetical Order...</option>
                 <option value="atoz">A to Z</option>
                 <option value="ztoa">Z to A</option>
               </select>
-              <select className="select-Home" name="numerical" onChange={(e)=>handleHealthScore(e)}>
-                <option disabled selected>Health Score</option>
+              <select id={styles.select_Home} name="numerical" onChange={(e)=>handleHealthScore(e)}>
+                <option disabled selected>Health Score Order...</option>
                 <option value="asc">From Min to Max</option>
                 <option value="desc">From Max to Min</option>
                </select>
-               <select className="select-Home" name="diets" onChange={(e)=>handleFilterDietType(e)}>
-                 <option disabled selected>Select...</option>
+               <select id={styles.select_Home} name="diets" onChange={(e)=>handleFilterDietType(e)}>
+                 <option disabled selected>Select Diet...</option>
                  <option value="gluten free">Gluten Free</option>
                  <option value="ketogenic">Ketogenic</option>
                  <option value="vegetarian">Vegetarian</option>
@@ -95,12 +100,21 @@ export default function Home (){
                  <option value="whole 30">Whole30</option>
                  <option value="dairy free">Dairy Free</option>
                 </select>
+              </div>
                 <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado}/>
-                {
-                  actualRecipes?.map((recipe) => {
-                    return <Recipe name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id}/>
-                  })
-                }
+                <div id={styles.divCard}>
+                  {
+                    actualRecipes.length < 1 ? (
+                      <div id={styles.loading}>
+                        <span id={styles.dot}></span>
+                        <span id={styles.dot}></span>
+                        <span id={styles.dot}></span>
+                      </div>
+                    ) : (  actualRecipes?.map((recipe) => (
+                         <Recipe id={recipe.id}  name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id}/>
+                      )))
+                  }
+                </div>
             </div>
         </div>
     )
