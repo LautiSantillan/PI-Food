@@ -54,8 +54,8 @@ export default function CreateRecipe(){
 
   const handleSubmit = (e)=>{
    e.preventDefault();
-    if (input.name.trim() || input.name === 'number') {
-      return alert("Enter correct a name");
+    if (!input.name.trim()) {
+      return alert("Please add a name");
     } 
     else if (
       recipes.find(
