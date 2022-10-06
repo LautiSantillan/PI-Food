@@ -8,6 +8,8 @@ export const POST_RECIPE = "POST_RECIPE";
 export const FILTER_DIET_TYPE = "FILTER_DIET_TYPE";
 export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
+// export const GET_RECIPE_API_DB = "GET_RECIPE_API_DB";
 
 export function getRecipes() {
   return async function (dispatch) {
@@ -107,5 +109,12 @@ export function orderByHealthScore(payload) {
   return {
     type: ORDER_BY_HEALTHSCORE,
     payload,
+  };
+}
+
+export function cleanDetail() {
+  return {
+    type: CLEAR_DETAIL,
+    payload: [],
   };
 }

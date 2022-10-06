@@ -7,6 +7,7 @@ import {
   FILTER_DIET_TYPE,
   ORDER_ALPHABETICAL,
   ORDER_BY_HEALTHSCORE,
+  CLEAR_DETAIL,
 } from "../actions/index";
 
 const initialState = {
@@ -95,6 +96,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipes: orderHealthScore,
+      };
+
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        recipeDetail: action.payload,
       };
 
     default:
