@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
     },
     created: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
       defaultValue: true,
     },
   });

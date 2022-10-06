@@ -7,12 +7,12 @@ const { API_KEY } = process.env;
 
 const getInfoRecipe = async () => {
   try {
-    const infoApi = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
-    );
     // const infoApi = await axios.get(
-    //   `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`
+    //   `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=100&addRecipeInformation=true`
     // );
+    const infoApi = await axios.get(
+      `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`
+    );
     const data = infoApi.data.results;
     const infoRecipe = data?.map((recipe) => {
       let aux = "";
