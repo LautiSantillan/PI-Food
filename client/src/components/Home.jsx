@@ -17,8 +17,6 @@ export default function Home() {
   const allRecipes = useSelector((state) => state.recipes)
   const [loading, setLoading] = useState(true)
 
-  //  const [order, setOrder] = useState('')
-
   //PAGINADO------------------------------------------------------------------
 
   const [actualPage, setActualPage] = useState(1)
@@ -33,7 +31,7 @@ export default function Home() {
     setActualPage(pageNumber)
   }
 
-  if (allRecipes.length > 0 && !loading) {
+  if (allRecipes.length > 0 && loading) {
     setLoading(false)
   }
 
@@ -47,33 +45,23 @@ export default function Home() {
   const handleClick = (e) => {
     e.preventDefault()
     dispatch(getRecipes())
-    // setActualPage(1)
   }
 
   const handleFilterDietType = (e) => {
     e.preventDefault()
     dispatch(filterDietType(e.target.value))
-    // setActualPage(1)
   }
 
   const handleOrderAlphabetical = (e) => {
     e.preventDefault()
     dispatch(orderAlphabetical(e.target.value))
-    // setActualPage(1)
-    // setOrder(`Order ${e.target.value}`);
   }
 
   const handleHealthScore = (e) => {
     e.preventDefault()
     dispatch(orderByHealthScore(e.target.value))
-    // setActualPage(1)
-    // setOrder(`Order ${e.target.value}`);
   }
 
-  // const handleFilterApiDb = (e)=>{
-  //   e.preventDefault()
-  //   dispatch(getRecipeApiDb(e.target.value))
-  // }
 
   return (
     <div id={styles.Home}>
@@ -112,32 +100,15 @@ export default function Home() {
             <option value="whole 30">Whole30</option>
             <option value="dairy free">Dairy Free</option>
           </select>
-          {/* <select name="api-db" onChange={(e)=>handleFilterApiDb(e)}>
-                  <option value="all">All</option>
-                  <option value="api">API</option>
-                  <option value="db">DB</option>
-                </select> */}
-        </div>
-        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado} />
-        <div id={styles.divCard}>
-          {
-            actualRecipes.length < 1 ? (
-              <div id={styles.loading}>
-                <span id={styles.dot}></span>
-                <span id={styles.dot}></span>
-                <span id={styles.dot}></span>
-              </div>
-            ) : (actualRecipes?.map((recipe) => (
-              <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />
-            )))
-          }
         </div>
 
-        {/* <div id={styles.divCard}>
+        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado} />
+
+        <div id={styles.divCard}>
           {actualRecipes.length > 0 && !loading ? (
             actualRecipes?.map((recipe) => {
               return (
-               <Recipe id={recipe.id}  name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id}/>
+                <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />
               );
             })
           ) : !actualRecipes.length > 0 && loading ? (
@@ -145,7 +116,8 @@ export default function Home() {
           ) : (
             <NotFound />
           )}
-        </div> */}
+        </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       </div>
     </div>
   )

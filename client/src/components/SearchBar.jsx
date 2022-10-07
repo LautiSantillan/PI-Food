@@ -20,7 +20,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div id={styles.buttonSearchBar}>
+    <div id={styles.SearchBar}>
       <input id={styles.input} type="text" placeholder="Search..." onChange={handleInputName} value={name} />
       <button id={styles.buttonSearch} type="submit" onClick={handleSubmit}>Search</button>
     </div>

@@ -1,7 +1,5 @@
 #Home {
   background-image: url("../../images/Background-Home-2.jpg");
-  /* background-image: url(); */
-  /* background-color: rgba(88, 185, 93, 0.8);; */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -84,11 +82,13 @@
 }
 
 #select_Home {
+  color: black;
   height: 2em;
   border-radius: 2em;
   background-color: rgba(255, 236, 236, 0.8);
   border: none;
   margin-left: 30px;
+  font-size: 14px;
 }
 
 #h5 {
@@ -116,7 +116,7 @@
 }
 
 #buttonCreate:hover {
-  background-color: rgb(168, 167, 167);
+  background-color: rgb(255, 255, 255);
   color: black;
 }
 

@@ -79,7 +79,6 @@ export default function CreateRecipe() {
     ) {
       errors.name = `The ${input.name} already exists`;
     } else if (
-      // input.summary === "number" ||
       input.summary.length < 40 ||
       input.summary.trim() === ""
     ) {
@@ -117,11 +116,6 @@ export default function CreateRecipe() {
       history.push("/home");
     }
   }
-
-
-
-
-
 
   // const handleSubmit = (e)=>{
   //  e.preventDefault();
@@ -203,8 +197,8 @@ export default function CreateRecipe() {
           <ul>
             {input.diets.map((d) => (
               <div key={d}>
-                <div>{d + ""}</div>
-                <button value={d} onClick={() => handleDeleteDiets(d)}>x </button>
+                <div><h4 id={styles.selectDiet}>{d + ""}</h4></div>
+                <button id={styles.buttonDiet} value={d} onClick={() => handleDeleteDiets(d)}>x</button>
               </div>
             ))}
           </ul>
