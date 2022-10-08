@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getRecipes, filterDietType, orderAlphabetical, orderByHealthScore } from "../actions/index";
+import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore } from "../actions/index";
 import { Link } from "react-router-dom";
 import Recipe from "../components/Recipe"
 import Paginado from "./Paginado";
@@ -16,6 +16,7 @@ export default function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector((state) => state.recipes)
   const [loading, setLoading] = useState(true)
+  const [orden, setOrden] = useState("");
 
   //PAGINADO------------------------------------------------------------------
 
@@ -40,26 +41,33 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getRecipes())
+    dispatch(getDietsTypes())
   }, [dispatch])
 
   const handleClick = (e) => {
     e.preventDefault()
     dispatch(getRecipes())
+    setActualPage(1)
   }
 
   const handleFilterDietType = (e) => {
     e.preventDefault()
     dispatch(filterDietType(e.target.value))
+    setActualPage(1)
   }
 
   const handleOrderAlphabetical = (e) => {
     e.preventDefault()
     dispatch(orderAlphabetical(e.target.value))
+    setActualPage(1);
+    setOrden(`Ordenado ${e.target.value}`)
   }
 
   const handleHealthScore = (e) => {
     e.preventDefault()
     dispatch(orderByHealthScore(e.target.value))
+    setActualPage(1);
+    setOrden(`Ordenado ${e.target.value}`)
   }
 
 
@@ -102,7 +110,7 @@ export default function Home() {
           </select>
         </div>
 
-        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado} />
+        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado} actualPage={actualPage} />
 
         <div id={styles.divCard}>
           {actualRecipes.length > 0 && !loading ? (
@@ -117,7 +125,7 @@ export default function Home() {
             <NotFound />
           )}
         </div>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        {/* <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> */}
       </div>
     </div>
   )
