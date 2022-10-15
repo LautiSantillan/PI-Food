@@ -77,8 +77,8 @@
   justify-content: space-around;
   margin-top: 1em;
   margin-bottom: 1em;
-
 }
+
 
 #select_Home {
   color: black;
@@ -88,6 +88,10 @@
   border: none;
   margin-left: 30px;
   font-size: 14px;
+}
+
+#select_Home:hover {
+  background-color: white;
 }
 
 #h5 {

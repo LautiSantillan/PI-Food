@@ -9,26 +9,43 @@
   overflow: auto;
   margin: 0%;
   color: white;
+  justify-content: center;
 }
 
 #form {
   margin: 0% auto;
-  /* Centramos el formulario */
   width: 300px;
-  /* Sin ancho no podemos centrar el formulario */
   padding: 30px;
   justify-content: center;
   align-items: center;
+  color: rgb(43, 43, 43);
+  margin-top: 40px;
+  margin-right: 5px;
+  margin-left: 280px;
+  width: 700px;
+  background-color: rgba(248, 179, 100, 0.9);
+  border-radius: 5px;
+  border: solid rgb(231, 224, 224) 2px;
+  box-shadow: 0 0 4px #000000a8;
+  transition: all 400ms ease;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 60px;
+  margin-left: 300px;
+}
+
+#divInput {
+  justify-content: center;
 }
 
 #input {
   border-radius: 10px;
   padding: 8px;
-  background-color: rgba(248, 179, 100);
+  background-color: rgb(255, 255, 255);
   border-color: rgba(0, 140, 255, 0.66);
   border: 2px;
   margin-bottom: 10px;
-  margin-left: 30px;
+  margin-left: 11px;
 }
 
 #label {
@@ -39,7 +56,7 @@
   border-radius: 30px;
   display: block;
   padding: 3px;
-  margin-left: 48px;
+  margin-left: 240px;
 }
 
 #selectForm {
@@ -52,7 +69,7 @@
   background-color: rgba(255, 236, 236, 0.8);
   margin-left: 5px;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 3px;
 }
 
 
@@ -71,7 +88,10 @@
   border: none;
   background: rgba(255, 236, 236, 0.8);
   margin-bottom: 20px;
-  margin-left: 1px;
+}
+
+#buttonForm:hover {
+  background-color: white;
 }
 
 #buttonBack {
@@ -89,22 +109,26 @@
   border: none;
   background: rgba(255, 236, 236, 0.8);
   margin-bottom: 10px;
-  margin-left: 8px;
+  margin-left: 30px;
   margin-top: 40px;
+}
+
+#buttonBack:hover {
+  background-color: white;
 }
 
 #h1 {
   font-size: 40px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: rgb(66, 16, 7);
+  color: rgb(43, 43, 43);
   background: rgba(255, 236, 236, 0.8);
   border-radius: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.84);
+  border: none;
   position: relative;
   outline: none;
   width: 11em;
   height: 55px;
-  margin-left: 450px;
+  margin-left: 135px;
   justify-content: center;
 }
 
@@ -112,8 +136,15 @@
   color: rgb(255, 0, 0);
 }
 
+#divDiet {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
 #selectDiet {
   color: rgb(43, 43, 43);
+  margin-left: 20px;
 }
 
 #buttonDiet {
@@ -128,4 +159,5 @@
   outline: none;
   border: none;
   background: rgba(255, 236, 236, 0.8);
+  margin-left: 20px;
 }

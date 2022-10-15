@@ -29,11 +29,14 @@ export default function RecipeDetail(props) {
         ) :
           <div id={styles.detailCard}>
             <img src={recipeDetail.image} alt="Recipe Detail" />
-            <h2>Name: {recipeDetail.name}</h2>
-            <h4>Summary: {recipeDetail.summary?.replace(/<[^>]*>?/g, "")}</h4>
-            <h4>HealthScore: {recipeDetail.healthScore}</h4>
-            <h4>Steps: {recipeDetail.steps}</h4>
-            <h4 id={styles.title}>Diets: {recipeDetail.diets?.map((d, i) => {
+            <h3><span id={styles.spanh4}>Name: </span>{recipeDetail.name}</h3>
+            <h4><span id={styles.spanh4}>Summary: </span>{recipeDetail.summary?.replace(/<[^>]*>?/g, "")}</h4>
+            <h4><span id={styles.spanh4}>HealthScore: </span>{recipeDetail.healthScore}</h4>
+            <h4><span id={styles.spanh4}>Steps: </span>{recipeDetail.steps?.map(e => {
+              return <p>Step {e.number}: {e.step}</p>
+
+            })}</h4>
+            <h4 id={styles.title}><span id={styles.spanh4}>Diets: </span>{recipeDetail.diets?.map((d, i) => {
               return <span id={styles.span} key={i}>{d}</span>
             })}</h4>
           </div>

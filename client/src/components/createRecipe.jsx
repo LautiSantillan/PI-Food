@@ -17,7 +17,7 @@ export default function CreateRecipe() {
     name: "",
     summary: "",
     healthScore: "",
-    steps: "",
+    steps: [],
     image: "",
     diets: []
   })
@@ -61,6 +61,19 @@ export default function CreateRecipe() {
       diets: input.diets.filter((el) => el !== e),
     });
   };
+
+  const handleSteps = (e) => {
+    setInput({
+      ...input,
+      steps: [{ step: e.target.value }]
+    })
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+  }
 
 
   let validateUrl = /(http(s?):)([/|.|\w|\s|-])*.(?:jpg|gif|png)/;
@@ -109,7 +122,7 @@ export default function CreateRecipe() {
         name: "",
         summary: "",
         healthScore: "",
-        steps: "",
+        steps: [],
         image: "",
         diets: []
       });
@@ -159,9 +172,10 @@ export default function CreateRecipe() {
       <Link to={"/home"}>
         <button id={styles.buttonBack}>Back</button>
       </Link>
-      <h1 id={styles.h1}>Create your recipe!</h1>
+      {/* <h1 id={styles.h1}>Create your recipe!</h1> */}
       <form id={styles.form} onSubmit={(e) => handleSubmit(e)}>
-        <div>
+        <div id={styles.divInput}>
+          <h1 id={styles.h1}>Create your recipe!</h1>
           <label id={styles.label}>Name: </label>
           <input id={styles.input} type="text" value={input.name} name="name" onChange={(e) => handleChange(e)} />
           {errors.name && <h4 id={styles.error}>{errors.name}</h4>}
@@ -178,7 +192,7 @@ export default function CreateRecipe() {
         </div>
         <div>
           <label id={styles.label}>Steps: </label>
-          <textarea id={styles.input} type="text" value={input.steps} name="steps" onChange={(e) => handleChange(e)}></textarea>
+          <textarea id={styles.input} type="text" value={input.steps.step} name="steps" onChange={(e) => handleSteps(e)}></textarea>
           {errors.steps && <h4 id={styles.error}>{errors.steps}</h4>}
         </div>
         <div>
@@ -194,14 +208,14 @@ export default function CreateRecipe() {
               <option value={d.name} key={d.id}>{d.name}</option>
             ))}
           </select>
-          <ul>
+          <div id={styles.divDiet}>
             {input.diets.map((d) => (
               <div key={d}>
-                <div><h4 id={styles.selectDiet}>{d + ""}</h4></div>
+                <div><h4 id={styles.selectDiet}>{d}</h4></div>
                 <button id={styles.buttonDiet} value={d} onClick={() => handleDeleteDiets(d)}>x</button>
               </div>
             ))}
-          </ul>
+          </div>
           {errors.diets && <h4 id={styles.error}>{errors.diets}</h4>}
         </div>
         <button id={styles.buttonForm} type="submit">Create Recipe</button>
