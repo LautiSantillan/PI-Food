@@ -15,10 +15,10 @@ const getInfoRecipe = async () => {
     );
     const data = infoApi.data.results;
     const infoRecipe = data?.map((recipe) => {
-      let aux = "";
-      recipe.analyzedInstructions[0]?.steps.forEach((e) => {
-        aux += `Step ${e.number}: ${e.step} `;
-      });
+      // let aux = "";
+      // recipe.analyzedInstructions[0]?.steps.forEach((e) => {
+      //   aux += `Step ${e.number}: ${e.step} `;
+      // });
       return {
         id: recipe.id,
         name: recipe.title,
@@ -26,7 +26,13 @@ const getInfoRecipe = async () => {
         healthScore: recipe.healthScore,
         diets: recipe.diets,
         image: recipe.image,
-        steps: aux,
+        // steps: aux,
+        steps: recipe.analyzedInstructions[0]?.steps.map((e) => {
+          return {
+            number: e.number,
+            step: e.step,
+          };
+        }),
       };
     });
     return infoRecipe;
