@@ -9,10 +9,17 @@ export const FILTER_DIET_TYPE = "FILTER_DIET_TYPE";
 export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
-// export const GET_RECIPE_API_DB = "GET_RECIPE_API_DB";
+export const LOADING = "LOADING";
+
+export function loading() {
+  return {
+    type: LOADING,
+  };
+}
 
 export function getRecipes() {
   return async function (dispatch) {
+    dispatch(loading());
     try {
       const allRecipes = await axios.get("http://localhost:3001/recipes");
       return dispatch({
@@ -28,6 +35,7 @@ export function getRecipes() {
 //--------------SEARCH BAR-----------------------------
 export function getRecipeByName(name) {
   return async function (dispatch) {
+    dispatch(loading());
     try {
       const recipeName = await axios.get(
         `http://localhost:3001/recipes?name=${name}`
@@ -44,6 +52,7 @@ export function getRecipeByName(name) {
 
 export function getRecipeDetail(id) {
   return async function (dispatch) {
+    dispatch(loading());
     try {
       const recipeDetail = await axios.get(
         `http://localhost:3001/recipes/${id}`
@@ -118,3 +127,4 @@ export function cleanDetail() {
     payload: [],
   };
 }
+//------------------------------------------------------------------------

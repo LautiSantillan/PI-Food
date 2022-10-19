@@ -21,3 +21,4 @@ export default function Paginado({ recipesPerPage, allRecipes, paginado, actualP
   )
 
 }
+

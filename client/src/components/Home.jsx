@@ -15,6 +15,7 @@ import { Loading } from "./Loading";
 export default function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector((state) => state.recipes)
+  // const loading = useSelector(state => state.loading)
   const [loading, setLoading] = useState(true)
   const [orden, setOrden] = useState("");
 
@@ -26,13 +27,13 @@ export default function Home() {
   const indexOfLastRecipe = actualPage * recipesPerPage //9
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage //0
 
-  const actualRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
+  const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
   const paginado = (pageNumber) => {
     setActualPage(pageNumber)
   }
 
-  if (allRecipes.length > 0 && loading) {
+  if (allRecipes?.length > 0 && loading) {
     setLoading(false)
   }
 
@@ -45,29 +46,31 @@ export default function Home() {
   }, [dispatch])
 
   const handleClick = (e) => {
-    e.preventDefault()
-    dispatch(getRecipes())
-    setActualPage(1)
+    if (!loading && actualRecipes?.length > 0) {
+      e.preventDefault()
+      setLoading(true)
+      dispatch(getRecipes())
+    }
   }
 
   const handleFilterDietType = (e) => {
     e.preventDefault()
     dispatch(filterDietType(e.target.value))
-    setActualPage(1)
+    // setActualPage(1)
   }
 
   const handleOrderAlphabetical = (e) => {
     e.preventDefault()
     dispatch(orderAlphabetical(e.target.value))
-    setActualPage(1);
-    setOrden(`Ordenado ${e.target.value}`)
+    // setActualPage(1);
+    // setOrden(`Ordenado ${e.target.value}`)
   }
 
   const handleHealthScore = (e) => {
     e.preventDefault()
     dispatch(orderByHealthScore(e.target.value))
-    setActualPage(1);
-    setOrden(`Ordenado ${e.target.value}`)
+    // setActualPage(1);
+    // setOrden(`Ordenado ${e.target.value}`)
   }
 
 
@@ -79,7 +82,7 @@ export default function Home() {
       </div>
       <Link to={"/recipes"}><button id={styles.buttonCreate}>Create Recipe</button></Link>
       <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button>
-      <SearchBar />
+      <SearchBar setActualPage={setActualPage} setLoading={setLoading} />
       <div>
         <div id={styles.div_Select}>
           <select id={styles.select_Home} name="alphabetical" onChange={(e) => handleOrderAlphabetical(e)}>
@@ -110,22 +113,27 @@ export default function Home() {
           </select>
         </div>
 
-        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginado={paginado} actualPage={actualPage} />
+        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} paginado={paginado} actualPage={actualPage} />
 
-        <div id={styles.divCard}>
-          {actualRecipes.length > 0 && !loading ? (
+        {/* <div id={styles.divCard}>
+          {!loading && actualRecipes?.length > 0 ? (
             actualRecipes?.map((recipe) => {
               return (
                 <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />
               );
             })
-          ) : !actualRecipes.length > 0 && loading ? (
+          ) : loading && !actualRecipes?.length > 0 ? (
             <Loading />
           ) : (
             <NotFound />
           )}
+        </div> */}
+
+        <div id={styles.divCard}>
+          {loading ? (<Loading />) : actualRecipes?.length ?
+            actualRecipes?.map(recipe =>
+              <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />) : <NotFound />}
         </div>
-        {/* <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> */}
       </div>
     </div>
   )

@@ -8,6 +8,7 @@ import {
   ORDER_ALPHABETICAL,
   ORDER_BY_HEALTHSCORE,
   CLEAR_DETAIL,
+  LOADING,
 } from "../actions/index";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   allRecipes: [], //es una propiedad de respaldo
   diets: [],
   recipeDetail: [],
+  loading: true,
 };
 
 function rootReducer(state = initialState, action) {
@@ -22,6 +24,7 @@ function rootReducer(state = initialState, action) {
     case GET_RECIPES:
       return {
         ...state,
+        loading: false,
         recipes: action.payload,
         allRecipes: action.payload,
       };
@@ -29,12 +32,14 @@ function rootReducer(state = initialState, action) {
     case GET_RECIPE_BY_NAME:
       return {
         ...state,
+        loading: false,
         recipes: action.payload,
       };
 
     case GET_RECIPE_DETAIL:
       return {
         ...state,
+        loading: false,
         recipeDetail: action.payload,
       };
 
@@ -102,6 +107,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipeDetail: action.payload,
+      };
+
+    case LOADING:
+      return {
+        loading: true,
       };
 
     default:

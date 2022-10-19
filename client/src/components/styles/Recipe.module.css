@@ -97,9 +97,9 @@
   -webkit-text-stroke: 0.5px rgb(75, 71, 71);
 }
 
-/* .cardRecipe:hover {
-  transform: scale(5.5);
-} */
+#cardRecipe:hover {
+  transform: scale(1.05, 1.05);
+}
 
 #image {
   width: 340px;

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getRecipeByName } from "../actions";
 import styles from "./styles/SearchBar.module.css"
 
-export default function SearchBar() {
+export default function SearchBar({ setActualPage, setLoading }) {
   const dispatch = useDispatch()
   const [name, setName] = useState("")
 
@@ -16,6 +16,8 @@ export default function SearchBar() {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(getRecipeByName(name))
+    setLoading(true)
+    setActualPage(1)
     setName("")
   }
 
