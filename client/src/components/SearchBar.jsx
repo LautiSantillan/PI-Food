@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getRecipeByName } from "../actions";
 import styles from "./styles/SearchBar.module.css"
 
