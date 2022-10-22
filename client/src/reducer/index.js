@@ -9,6 +9,7 @@ import {
   ORDER_BY_HEALTHSCORE,
   CLEAR_DETAIL,
   LOADING,
+  SET_CURRENT_PAGE,
 } from "../actions/index";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   diets: [],
   recipeDetail: [],
   loading: true,
+  currentPage: 1,
 };
 
 function rootReducer(state = initialState, action) {
@@ -112,6 +114,11 @@ function rootReducer(state = initialState, action) {
     case LOADING:
       return {
         loading: true,
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       };
 
     default:

@@ -1,5 +1,7 @@
 #Home {
   background-image: url("../../images/Background-Home-2.jpg");
+  /* background: linear-gradient(to top, transparent, rgb(105, 179, 228)); */
+  /* background-image: linear-gradient(to bottom, #00fff2, #00c8d9, #1b92b0, #32607c, #2a3444); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;

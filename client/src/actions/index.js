@@ -10,6 +10,7 @@ export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const LOADING = "LOADING";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 export function loading() {
   return {
@@ -44,9 +45,11 @@ export function getRecipeByName(name) {
         type: GET_RECIPE_BY_NAME,
         payload: recipeName.data,
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
+    return dispatch({
+      type: GET_RECIPE_BY_NAME,
+      payload: [],
+    });
   };
 }
 
@@ -127,4 +130,10 @@ export function cleanDetail() {
     payload: [],
   };
 }
-//------------------------------------------------------------------------
+
+export function setCurrentPage(payload) {
+  return {
+    type: SET_CURRENT_PAGE,
+    payload,
+  };
+}

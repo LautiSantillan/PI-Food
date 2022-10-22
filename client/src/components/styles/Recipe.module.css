@@ -87,6 +87,7 @@
   width: 340px;
   height: 450px;
   background: rgba(248, 179, 100);
+  /* background-image: linear-gradient(to bottom, #32f474, #31f06e, #2feb68, #2ee761, #2de35b); */
   border-radius: 20px;
   transition: all 0.3s;
   margin-top: 20px;
