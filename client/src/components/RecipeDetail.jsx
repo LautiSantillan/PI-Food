@@ -18,6 +18,12 @@ export default function RecipeDetail(props) {
     return () => dispatch(cleanDetail())
   }, [dispatch, id])
 
+
+  const handleButton = (e) => {
+    e.preventDefault()
+    history.goBack()
+  }
+
   return (
     <div id={styles.recipeDetail}>
       {
@@ -47,7 +53,7 @@ export default function RecipeDetail(props) {
             })}</h4>
           </div>
       }
-      <button id={styles.button} onClick={() => { history.goBack() }}>Back</button>
+      <button id={styles.button} onClick={(e) => handleButton(e)}>Back</button>
     </div>
   )
 }

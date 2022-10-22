@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar";
 import img from "../images/recipe-tittle.png"
 import { NotFound } from "./NotFound";
 import { Loading } from "./Loading";
+import NavBar from "./NavBar";
 
 
 export default function Home() {
@@ -78,13 +79,15 @@ export default function Home() {
 
   return (
     <div id={styles.Home}>
-      <div id={styles.div_h1}>
+      <NavBar setActualPage={setActualPage}></NavBar>
+      {/* <div id={styles.div_h1}>
         <h1 id={styles.h1}>Recipes</h1>
         <img id={styles.img} src={img} alt="Recipe" width="50px" height="50px" />
-      </div>
-      <Link to={"/recipes"}><button id={styles.buttonCreate}>Create Recipe</button></Link>
-      <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button>
-      <SearchBar setActualPage={setActualPage} /* setLoading={setLoading} */ />
+      </div> */}
+      {/* <Link to={"/recipes"}><button id={styles.buttonCreate}>Create Recipe</button></Link> */}
+      {/* <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button> */}
+      {/* <NavBar></NavBar> */}
+      {/* <SearchBar setActualPage={setActualPage} /> */}
       <div>
         <div id={styles.div_Select}>
           <select id={styles.select_Home} name="alphabetical" onChange={(e) => handleOrderAlphabetical(e)} defaultValue="default">
@@ -113,6 +116,7 @@ export default function Home() {
             <option value="whole 30">Whole30</option>
             <option value="dairy free">Dairy Free</option>
           </select>
+          <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button>
         </div>
 
         <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} actualPage={actualPage} setActualPage={setActualPage} />

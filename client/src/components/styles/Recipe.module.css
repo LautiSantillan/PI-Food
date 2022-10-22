@@ -85,7 +85,7 @@
 
 #cardRecipe {
   width: 340px;
-  height: 450px;
+  height: 420px;
   background: rgba(248, 179, 100);
   /* background-image: linear-gradient(to bottom, #32f474, #31f06e, #2feb68, #2ee761, #2de35b); */
   border-radius: 20px;
@@ -96,15 +96,17 @@
   float: left;
   -webkit-text-fill-color: rgb(43, 43, 43);
   -webkit-text-stroke: 0.5px rgb(75, 71, 71);
+  box-shadow: 0rem 0.1875rem 0.375rem rgb(68, 63, 53);
 }
 
 #cardRecipe:hover {
   transform: scale(1.05, 1.05);
+  box-shadow: 0rem 0.1875rem 0.375rem rgb(68, 63, 53);
 }
 
 #image {
   width: 340px;
-  height: 230px;
+  height: 215px;
   border-radius: 20px 20px 0px 0px;
 }
 
@@ -123,6 +125,7 @@
 #p {
   display: inline-block;
   margin: 0.05rem 0.2rem 0.05rem 0.2rem;
+  margin-top: 8px;
   margin-bottom: 5px;
   font-size: smaller;
   padding: 0.1rem 0.4rem;
