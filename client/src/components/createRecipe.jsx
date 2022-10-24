@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getDietsTypes, postRecipe } from "../actions/index"
 import styles from "./styles/CreateRecipe.module.css"
+import NavBarHome from "./NavBarHome";
 
 export default function CreateRecipe() {
   const dispatch = useDispatch()
@@ -169,9 +170,10 @@ export default function CreateRecipe() {
 
   return (
     <div id={styles.createRecipe}>
-      <Link to={"/home"}>
+      <NavBarHome />
+      {/* <Link to={"/home"}>
         <button id={styles.buttonBack}>Back</button>
-      </Link>
+      </Link> */}
       {/* <h1 id={styles.h1}>Create your recipe!</h1> */}
       <form id={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div id={styles.divInput}>

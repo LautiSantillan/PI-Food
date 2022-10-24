@@ -1,21 +1,17 @@
 #recipeDetail {
-  /* background-image: url("../../images/Background-Home.jpg"); */
   background-image: url("../../images/Background-Home-2.jpg");
   background-size: 100% 100%;
-  /* Escala la imagen al mayor tamaño posible sin estirarla.  */
   background-repeat: no-repeat;
   background-position: center;
   width: 100vw;
   height: 100vh;
   background-attachment: fixed;
   overflow: auto;
-  margin: 0%;
 }
 
 #detailCard {
   color: rgb(43, 43, 43);
   margin-top: 50px;
-  /* margin-right: 5px; */
   margin-left: 250px;
   padding: 20px;
   width: 800px;
@@ -26,12 +22,9 @@
   transition: all 400ms ease;
   text-align: center;
   justify-content: center;
+  margin-bottom: 40px;
 }
 
-#title {
-  /* display: inline-flex;
-  justify-content: center; */
-}
 
 #span {
   margin-left: 15px;

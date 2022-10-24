@@ -3,9 +3,6 @@
   color: rgb(0, 0, 0);
   font-weight: bold;
   cursor: pointer;
-  justify-content: center;
-  display: flex;
-  outline: none;
   border-radius: 20px;
   border: 30px;
 }
@@ -13,7 +10,7 @@
 #input {
   display: flex;
   border: none;
-  height: 30px;
+  height: 25px;
   border-radius: 20px 0px 0px 20px;
   background-color: rgba(255, 236, 236, 0.8);
   margin-top: 11px;
@@ -34,5 +31,5 @@
 
 
 #img {
-  padding-top: 5px;
+  margin-top: 1.5px;
 }

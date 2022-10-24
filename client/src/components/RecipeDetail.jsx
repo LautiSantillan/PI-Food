@@ -3,13 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeDetail, cleanDetail } from "../actions";
 import { useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./styles/RecipeDetail.module.css"
+import NavBarHome from "./NavBarHome";
 
 export default function RecipeDetail(props) {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const history = useHistory()
   const recipeDetail = useSelector(state => state.recipeDetail)
   const loading = useSelector(state => state.loading)
 
@@ -19,13 +19,9 @@ export default function RecipeDetail(props) {
   }, [dispatch, id])
 
 
-  const handleButton = (e) => {
-    e.preventDefault()
-    history.goBack()
-  }
-
   return (
     <div id={styles.recipeDetail}>
+      <NavBarHome />
       {
         loading && !recipeDetail?.length > 0 ? (
           <div id={styles.loading}>
@@ -53,7 +49,6 @@ export default function RecipeDetail(props) {
             })}</h4>
           </div>
       }
-      <button id={styles.button} onClick={(e) => handleButton(e)}>Back</button>
     </div>
   )
 }

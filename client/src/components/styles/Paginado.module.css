@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   margin-right: 50px;
+
 }
 
 .pagActual {
@@ -16,6 +17,7 @@
   align-items: flex-start;
   justify-content: end;
   cursor: pointer;
+  box-shadow: 0rem 0.1875rem 0.375rem rgb(68, 63, 53);
 }
 
 .pagOther {
@@ -30,4 +32,5 @@
   align-items: flex-start;
   justify-content: end;
   cursor: pointer;
+  box-shadow: 0rem 0.1875rem 0.375rem rgb(68, 63, 53);
 }

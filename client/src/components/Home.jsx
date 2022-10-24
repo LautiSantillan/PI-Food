@@ -2,12 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore } from "../actions/index";
-import { Link } from "react-router-dom";
 import Recipe from "../components/Recipe"
 import Paginado from "./Paginado";
 import styles from "./styles/Home.module.css"
-import SearchBar from "./SearchBar";
-import img from "../images/recipe-tittle.png"
 import { NotFound } from "./NotFound";
 import { Loading } from "./Loading";
 import NavBar from "./NavBar";
@@ -17,7 +14,6 @@ export default function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector((state) => state.recipes)
   const loading = useSelector(state => state.loading)
-  // const [loading, setLoading] = useState(true)
   // const [orden, setOrden] = useState("");
 
   //PAGINADO------------------------------------------------------------------
@@ -116,7 +112,7 @@ export default function Home() {
             <option value="whole 30">Whole30</option>
             <option value="dairy free">Dairy Free</option>
           </select>
-          <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button>
+          <button id={styles.buttonClear} onClick={handleClick}>Reload</button>
         </div>
 
         <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} actualPage={actualPage} setActualPage={setActualPage} />
@@ -138,8 +134,11 @@ export default function Home() {
 
         <div id={styles.divCard}>
           {loading ? <Loading /> : actualRecipes?.length > 0 ?
-            actualRecipes.map(recipe =>
-              <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />) : <NotFound />}
+            <div id={styles.divCard}>
+              {actualRecipes.map(recipe =>
+                <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />)}
+            </div>
+            : <NotFound />}
         </div>
 
 
