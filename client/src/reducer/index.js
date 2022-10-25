@@ -10,6 +10,8 @@ import {
   CLEAR_DETAIL,
   LOADING,
   SET_CURRENT_PAGE,
+  UPDATE_RECIPE,
+  DELETE_RECIPE,
 } from "../actions/index";
 
 const initialState = {
@@ -54,6 +56,21 @@ function rootReducer(state = initialState, action) {
     case POST_RECIPE:
       return {
         ...state,
+      };
+
+    case UPDATE_RECIPE:
+      return {
+        ...state,
+      };
+
+    case DELETE_RECIPE:
+      const allRecipes3 = state.allRecipes;
+      const deletedRecipe = allRecipes3.filter(
+        (recipe) => recipe.id !== action.payload
+      );
+      return {
+        ...state,
+        recipes: deletedRecipe,
       };
 
     case FILTER_DIET_TYPE:

@@ -35,11 +35,6 @@ export default function Home() {
   //   dispatch(setCurrentPage(number))
   // }
 
-  // if (allRecipes?.length > 0 && loading) {
-  //   setLoading(false)
-  // }
-
-  //-------------------------------------------------------------------------------------
 
 
   useEffect(() => {
@@ -76,14 +71,6 @@ export default function Home() {
   return (
     <div id={styles.Home}>
       <NavBar setActualPage={setActualPage}></NavBar>
-      {/* <div id={styles.div_h1}>
-        <h1 id={styles.h1}>Recipes</h1>
-        <img id={styles.img} src={img} alt="Recipe" width="50px" height="50px" />
-      </div> */}
-      {/* <Link to={"/recipes"}><button id={styles.buttonCreate}>Create Recipe</button></Link> */}
-      {/* <button id={styles.buttonClear} onClick={handleClick}>Clear Filters</button> */}
-      {/* <NavBar></NavBar> */}
-      {/* <SearchBar setActualPage={setActualPage} /> */}
       <div>
         <div id={styles.div_Select}>
           <select id={styles.select_Home} name="alphabetical" onChange={(e) => handleOrderAlphabetical(e)} defaultValue="default">
@@ -117,26 +104,11 @@ export default function Home() {
 
         <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} actualPage={actualPage} setActualPage={setActualPage} />
 
-        {/* <div id={styles.divCard}>
-          {actualRecipes?.length > 0 && !loading ? (
-            actualRecipes?.map((recipe) => {
-              return (
-                <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />
-              );
-            })
-          ) : !actualRecipes?.length > 0 && loading ? (
-            <Loading />
-          ) : (
-            <NotFound />
-          )}
-        </div> */}
-
-
         <div id={styles.divCard}>
           {loading ? <Loading /> : actualRecipes?.length > 0 ?
             <div id={styles.divCard}>
               {actualRecipes.map(recipe =>
-                <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} key={recipe.id} />)}
+                <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} created={recipe.created} key={recipe.id} />)}
             </div>
             : <NotFound />}
         </div>

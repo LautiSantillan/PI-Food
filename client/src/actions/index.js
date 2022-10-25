@@ -11,6 +11,8 @@ export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const LOADING = "LOADING";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const UPDATE_RECIPE = "UPDATE_RECIPE";
+export const DELETE_RECIPE = "DELETE_RECIPE";
 
 export function loading() {
   return {
@@ -26,6 +28,41 @@ export function getRecipes() {
       return dispatch({
         type: GET_RECIPES,
         payload: allRecipes.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+//--------------RECIPE DATABASE-----------------------------
+
+export function updateRecipe(id, payload) {
+  return async function (dispatch) {
+    try {
+      const recipeId = await axios.put(
+        `http://localhost:3001/recipes/${id}`,
+        payload
+      );
+      return dispatch({
+        type: UPDATE_RECIPE,
+        payload: recipeId.data.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function deleteRecipe(id) {
+  return async function (dispatch) {
+    try {
+      const recipeId = await axios.delete(
+        `http://localhost:3001/recipes/${id}`
+      );
+      return dispatch({
+        type: DELETE_RECIPE,
+        payload: recipeId.data.id,
       });
     } catch (error) {
       console.log(error);

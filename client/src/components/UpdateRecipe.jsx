@@ -1,13 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getDietsTypes, postRecipe } from "../actions/index"
-import styles from "./styles/CreateRecipe.module.css"
+import { getDietsTypes, updateRecipe } from "../actions/index"
+import styles from "./styles/UpdateRecipe.module.css"
 import NavBarHome from "./NavBarHome";
 
-export default function CreateRecipe() {
+export default function UpdateRecipe() {
   const dispatch = useDispatch()
+  const { id } = useParams()
   const history = useHistory()
   let allRecipes = useSelector(state => state.allRecipes)
   const dietsTypes = useSelector(state => state.diets)
@@ -114,11 +115,13 @@ export default function CreateRecipe() {
     e.preventDefault();
     setErrors(validate(input));
     let error = validate(input);
+    console.log(id)
+    console.log(input)
 
     if (Object.values(error).length !== 0) {
     } else {
-      dispatch(postRecipe(input));
-      alert("A new Recipe has been created");
+      dispatch(updateRecipe(id, input));
+      alert("The Recipe has been modified");
       setInput({
         name: "",
         summary: "",
@@ -132,12 +135,13 @@ export default function CreateRecipe() {
   }
 
 
+
   return (
     <div id={styles.createRecipe}>
       <NavBarHome />
       <form id={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div id={styles.divInput}>
-          <h1 id={styles.h1}>Create your recipe!</h1>
+          <h1 id={styles.h1}>Modify your recipe</h1>
           <label id={styles.label}>Name: </label>
           <input id={styles.input} type="text" value={input.name} name="name" onChange={(e) => handleChange(e)} />
           {errors.name && <h4 id={styles.error}>{errors.name}</h4>}
@@ -164,8 +168,8 @@ export default function CreateRecipe() {
         </div>
         <div>
           <label id={styles.label}>Diets: </label>
-          <select id={styles.selectForm} onChange={(e) => handleSelect(e)} defaultValue="default">
-            <option disabled selected > Select diets...</option>
+          <select id={styles.selectForm} onChange={(e) => handleSelect(e)}>
+            <option disabled selected>Select diets...</option>
             {dietsTypes?.map((d) => (
               <option value={d.name} key={d.id}>{d.name}</option>
             ))}
@@ -180,7 +184,7 @@ export default function CreateRecipe() {
           </div>
           {errors.diets && <h4 id={styles.error}>{errors.diets}</h4>}
         </div>
-        <button id={styles.buttonForm} type="submit">Create Recipe</button>
+        <button id={styles.buttonForm} type="submit">Modify Recipe</button>
       </form>
     </div>
   )
