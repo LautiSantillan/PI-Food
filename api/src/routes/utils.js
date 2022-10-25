@@ -94,7 +94,29 @@ const postNewRecipe = async (objRecipe) => {
 
     newRecipe.addDiet(dietsTypes);
   } catch (error) {
-    console.log("Error en postNewRecipe", error);
+    console.log("Error in postNewRecipe", error);
+  }
+};
+
+const deleteRecipe = async (id) => {
+  try {
+    const deletedRecipe = await Recipe.findByPk(id);
+    await Recipe.destroy({
+      where: { id: id },
+    });
+    return deletedRecipe;
+  } catch (error) {
+    console.log("Error in deleteRecipe", error);
+  }
+};
+
+const updateRecipe = async (id, datos) => {
+  try {
+    await Recipe.update(datos, {
+      where: { id: id },
+    });
+  } catch (error) {
+    console.log("Error in updateRecipe", error);
   }
 };
 
@@ -142,4 +164,6 @@ module.exports = {
   postNewRecipe,
   createDietsDB,
   getInfoDietsDB,
+  deleteRecipe,
+  updateRecipe,
 };

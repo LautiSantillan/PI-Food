@@ -1,6 +1,10 @@
 const { Router } = require("express");
-const axios = require("axios");
-const { getAllRecipes, postNewRecipe } = require("./utils");
+const {
+  getAllRecipes,
+  postNewRecipe,
+  deleteRecipe,
+  updateRecipe,
+} = require("./utils");
 
 const router = Router();
 
@@ -46,6 +50,28 @@ router.post("/", async (req, res) => {
     res.status(201).json(postRecipe);
   } catch (error) {
     res.status(404).json("Error in route post Recipe", error);
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const datos = req.body;
+    const updatedRecipe = await updateRecipe(id, datos);
+    console.log(updatedRecipe);
+    res.status(200).json(updatedRecipe);
+  } catch (error) {
+    res.status(404).json("Error in route update Recipe", error);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedRecipe = await deleteRecipe(id);
+    res.status(200).json(deletedRecipe);
+  } catch (error) {
+    res.status(404).json("Error in route delete Recipe", error);
   }
 });
 
