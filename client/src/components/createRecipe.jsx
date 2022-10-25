@@ -55,7 +55,6 @@ export default function CreateRecipe() {
     );
   }
 
-
   const handleDeleteDiets = (e) => {
     setInput({
       ...input,
@@ -165,7 +164,7 @@ export default function CreateRecipe() {
         <div>
           <label id={styles.label}>Diets: </label>
           <select id={styles.selectForm} onChange={(e) => handleSelect(e)} defaultValue="default">
-            <option disabled selected > Select diets...</option>
+            <option disabled value="default" > Select diets...</option>
             {dietsTypes?.map((d) => (
               <option value={d.name} key={d.id}>{d.name}</option>
             ))}

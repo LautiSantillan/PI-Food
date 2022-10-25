@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./styles/Paginado.module.css"
-import { useSelector, useDispatch } from "react-redux"
+import { /* useSelector */useDispatch } from "react-redux"
 import { setCurrentPage } from "../actions";
 
 export default function Paginado({ recipesPerPage, allRecipes, actualPage, setActualPage }) {
   const dispatch = useDispatch()
-  const currentPage = useSelector(state => state.currentPage)
+  // const currentPage = useSelector(state => state.currentPage)
   const pageNumbers = []
 
   // const handlePaginado = (event, number) => {
@@ -18,8 +18,6 @@ export default function Paginado({ recipesPerPage, allRecipes, actualPage, setAc
     dispatch(setCurrentPage(number))
     setActualPage(number)
   }
-
-  console.log(actualPage)
 
   for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
     pageNumbers.push(i)

@@ -38,14 +38,14 @@ export default function RecipeDetail(props) {
             {
               recipeDetail?.created
                 ? <h4><div id={styles.spanh4}>Steps </div>{recipeDetail?.steps?.map(e => {
-                  return <p>{e.step}</p>
+                  return <p key={e.step}>{e.step}</p>
                 })}</h4>
                 : <h4><div id={styles.spanh4}>Steps </div>{recipeDetail?.steps?.map(e => {
-                  return <p>Step {e.number}: {e.step}</p>
+                  return <p key={e.step}>Step {e.number}: {e.step}</p>
                 })}</h4>
             }
-            <h4 id={styles.title}><div id={styles.spanh4}>Diets </div>{recipeDetail?.diets?.map((d, i) => {
-              return <span id={styles.span} key={i}>{d}</span>
+            <h4 id={styles.title}><div id={styles.spanh4}>Diets </div>{recipeDetail?.diets?.map((d) => {
+              return <span key={d} id={styles.span}>{d}</span>
             })}</h4>
           </div>
       }
