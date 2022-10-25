@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
       const recipeById = infoApi.find((recipe) => recipe.id == id);
       recipeById
         ? res.status(200).json(recipeById)
-        : res.status(404).json("No recipe detail found");
+        : res.status(404).json("Not found recipe detail");
     }
   } catch (error) {
     res.status(404).json("Error in route getId Recipe", error);
