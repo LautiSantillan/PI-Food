@@ -20,7 +20,7 @@ export default function Home() {
 
   const [currentPage, setCurrentPage] = useState(1)
   // const currentPage = useSelector(state => state?.currentPage)
-  console.log(currentPage)
+
 
   // eslint-disable-next-line
   const [recipesPerPage, setRecipesPerPage] = useState(9)
