@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore } from "../actions/index";
+import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore, /* setPage */ } from "../actions/index";
 import Recipe from "../components/Recipe"
 import Paginado from "./Paginado";
 import styles from "./styles/Home.module.css"
@@ -18,28 +18,34 @@ export default function Home() {
 
   //PAGINADO------------------------------------------------------------------
 
-  const [actualPage, setActualPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1)
+  // const currentPage = useSelector(state => state?.currentPage)
+  console.log(currentPage)
+
+  // eslint-disable-next-line
   const [recipesPerPage, setRecipesPerPage] = useState(9)
 
-  const indexOfLastRecipe = actualPage * recipesPerPage //9
+  const indexOfLastRecipe = currentPage * recipesPerPage //9
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage //0
 
   const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
-  // const paginado = (number) => {
-  //   setActualPage(number)
-  // }
-
-  // const paginado = () => {
-  //   console.log(currentPage)
-  //   dispatch(setCurrentPage(number))
-  // }
+  const paginado = (number) => {
+    // dispatch(setPage(number))
+    setCurrentPage(number)
+  }
 
 
+  // useEffect(() => {
+  //   if (allVideogames.length === 0) {
+  //     dispatch(getVideogames());
+  //   }
+  // }, [dispatch, allVideogames]);
 
   useEffect(() => {
     dispatch(getRecipes())
     dispatch(getDietsTypes())
+    // dispatch(setPage(1))
   }, [dispatch])
 
   const handleClick = (e) => {
@@ -50,27 +56,30 @@ export default function Home() {
   const handleFilterDietType = (e) => {
     e.preventDefault()
     dispatch(filterDietType(e.target.value))
-    setActualPage(1)
+    // dispatch(setPage(1))
+    paginado(1)
   }
 
   const handleOrderAlphabetical = (e) => {
     e.preventDefault()
     dispatch(orderAlphabetical(e.target.value))
-    setActualPage(1);
+    // dispatch(setPage(1))
+    paginado(1)
     // setOrden(`Ordenado ${e.target.value}`)
   }
 
   const handleHealthScore = (e) => {
     e.preventDefault()
     dispatch(orderByHealthScore(e.target.value))
-    setActualPage(1);
+    // dispatch(setPage(1))
+    paginado(1)
     // setOrden(`Ordenado ${e.target.value}`)
   }
 
 
   return (
     <div id={styles.Home}>
-      <NavBar setActualPage={setActualPage}></NavBar>
+      <NavBar paginado={paginado}></NavBar>
       <div>
         <div id={styles.div_Select}>
           <select id={styles.select_Home} name="alphabetical" onChange={(e) => handleOrderAlphabetical(e)} defaultValue="default">
@@ -102,7 +111,7 @@ export default function Home() {
           <button id={styles.buttonClear} onClick={handleClick}>Reload</button>
         </div>
 
-        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} actualPage={actualPage} setActualPage={setActualPage} />
+        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} currentPage={currentPage} /* setActualPage={setActualPage} */ paginado={paginado} />
 
         <div id={styles.divCard}>
           {loading ? <Loading /> : actualRecipes?.length > 0 ?
@@ -112,7 +121,6 @@ export default function Home() {
             </div>
             : <NotFound />}
         </div>
-
 
       </div>
     </div>

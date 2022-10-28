@@ -10,7 +10,7 @@ export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const LOADING = "LOADING";
-export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_PAGE = "SET_PAGE";
 export const UPDATE_RECIPE = "UPDATE_RECIPE";
 export const DELETE_RECIPE = "DELETE_RECIPE";
 
@@ -168,9 +168,9 @@ export function cleanDetail() {
   };
 }
 
-export function setCurrentPage(payload) {
+export function setPage(payload) {
   return {
-    type: SET_CURRENT_PAGE,
+    type: SET_PAGE,
     payload,
   };
 }
