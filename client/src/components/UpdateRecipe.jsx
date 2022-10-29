@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getDietsTypes, updateRecipe } from "../actions/index"
 import styles from "./styles/UpdateRecipe.module.css"
-import NavBarHome from "./navbarhome";
+import NavBarHome from "./NavBarHome";
 
 export default function UpdateRecipe() {
   const dispatch = useDispatch()

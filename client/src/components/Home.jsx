@@ -2,12 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore, /* setPage */ } from "../actions/index";
-import Recipe from "./recipe"
-import Paginado from "./paginado";
+import Recipe from "./Recipe"
+import Paginado from "./Paginado";
 import styles from "./styles/Home.module.css"
-import { NotFound } from "./notfound";
-import { Loading } from "./loading";
-import NavBar from "./navbar";
+import { NotFound } from "./NotFound";
+import { Loading } from "./Loading";
+import NavBar from "./NavBar";
 
 
 export default function Home() {
