@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore, /* setPage */ } from "../actions/index";
-import Recipe from "../components/Recipe"
+import Recipe from "./Recipe"
 import Paginado from "./Paginado";
 import styles from "./styles/Home.module.css"
 import { NotFound } from "./NotFound";

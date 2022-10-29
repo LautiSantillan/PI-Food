@@ -5,7 +5,7 @@ import { getRecipeDetail, cleanDetail } from "../actions";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./styles/RecipeDetail.module.css"
-import NavBarHome from "./NavBarHome";
+import NavBarHome from "./navbarhome";
 
 export default function RecipeDetail(props) {
   const { id } = useParams()
