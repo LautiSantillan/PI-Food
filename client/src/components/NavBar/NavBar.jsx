@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./styles/NavBar.module.css"
-import SearchBar from "./SearchBar";
+import styles from "../NavBar/NavBar.module.css"
+import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 
 export default function NavBar({ paginado }) {

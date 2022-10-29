@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./styles/Recipe.module.css"
+import styles from "../Recipe/Recipe.module.css"
 import { useDispatch } from "react-redux"
-import { deleteRecipe } from "../actions/index";
+import { deleteRecipe } from "../../actions/index";
 
 export default function Recipe({ id, image, name, diets, created }) {
   const dispatch = useDispatch()

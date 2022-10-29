@@ -2,9 +2,9 @@ import React from "react";
 import { useHistory } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getDietsTypes, postRecipe } from "../actions/index"
-import styles from "./styles/CreateRecipe.module.css"
-import NavBarHome from "./NavBarHome";
+import { getDietsTypes, postRecipe } from "../../actions/index"
+import styles from "./CreateRecipe.module.css"
+import NavBarHome from "../NavBarHome/NavBarHome";
 
 export default function CreateRecipe() {
   const dispatch = useDispatch()

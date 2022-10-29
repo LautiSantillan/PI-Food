@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./styles/Home.module.css"
+import styles from "../Home/Home.module.css"
 
-export function Loading() {
+export default function Loading() {
   return (
     <div id={styles.loading}>
       <span id={styles.dot}></span>

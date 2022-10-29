@@ -1,11 +1,11 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipeDetail, cleanDetail } from "../actions";
+import { getRecipeDetail, cleanDetail } from "../../actions";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styles from "./styles/RecipeDetail.module.css"
-import NavBarHome from "./NavBarHome";
+import styles from "../RecipeDetail/RecipeDetail.module.css"
+import NavBarHome from "../NavBarHome/NavBarHome";
 
 export default function RecipeDetail(props) {
   const { id } = useParams()

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/NavBarHome.module.css"
+import styles from "../NavBarHome/NavBarHome.module.css"
 import { useHistory } from "react-router-dom";
 
 export default function NavBarHome() {

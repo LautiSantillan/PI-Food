@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getRecipeByName, /* setPage */ } from "../actions";
-import styles from "./styles/SearchBar.module.css"
+import { getRecipeByName, /* setPage */ } from "../../actions";
+import styles from "../SearchBar/SearchBar.module.css"
 
 export default function SearchBar({ paginado }) {
   const dispatch = useDispatch()

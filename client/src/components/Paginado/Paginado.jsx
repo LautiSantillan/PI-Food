@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/Paginado.module.css"
+import styles from "../Paginado/Paginado.module.css"
 
 
 
