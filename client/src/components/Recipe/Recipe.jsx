@@ -27,8 +27,8 @@ export default function Recipe({ id, image, name, diets, created }) {
               </p>
             ))}
             <br /><br />
-            <Link to={`/updaterecipe/${id}`}><button>Modify</button></Link>
-            <button onClick={(e) => handleDelete(e)}>Delete</button>
+            <Link to={`/updaterecipe/${id}`}><button id={styles.button1}>Modify</button></Link>
+            <button id={styles.button2} onClick={(e) => handleDelete(e)}>Delete</button>
           </div>
         </Link>
         :

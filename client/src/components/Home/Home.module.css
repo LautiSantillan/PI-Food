@@ -80,8 +80,8 @@
   margin-bottom: 1em;
 }
 
-
 #select_Home {
+  display: flex;
   color: black;
   height: 2em;
   border-radius: 2em;

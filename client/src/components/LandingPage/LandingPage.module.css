@@ -10,6 +10,11 @@
   margin: 0%;
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+}
+
 #h1 {
   color: rgb(145, 91, 29);
   display: flex;

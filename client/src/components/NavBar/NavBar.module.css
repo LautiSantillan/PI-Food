@@ -18,10 +18,12 @@
 }
 
 #divButtonCreate {
+  display: flex;
   margin-left: 46rem;
 }
 
 #buttonCreate {
+  display: flex;
   min-width: 130px;
   height: 27px;
   color: rgb(0, 0, 0);
