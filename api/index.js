@@ -20,11 +20,12 @@
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const { createDietsDB } = require("./src/routes/utils");
+const { PORT } = process.env;
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
   createDietsDB();
-  server.listen(process.env.PORT, () => {
+  server.listen(PORT, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });
