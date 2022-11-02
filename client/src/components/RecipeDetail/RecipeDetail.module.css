@@ -9,12 +9,18 @@
   overflow: auto;
 }
 
+#divContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #detailCard {
   color: rgb(43, 43, 43);
   margin-top: 50px;
-  margin-left: 250px;
   padding: 20px;
   width: 800px;
+  max-width: 80%;
   background-color: rgba(248, 179, 100);
   border-radius: 5px;
   border: solid rgb(231, 224, 224) 2px;
@@ -22,6 +28,11 @@
   text-align: center;
   justify-content: center;
   margin-bottom: 40px;
+}
+
+#detailCard img {
+  width: 400px;
+  max-width: 80%;
 }
 
 

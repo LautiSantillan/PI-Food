@@ -18,6 +18,10 @@
   margin-bottom: 10px;
 }
 
+#input::placeholder {
+  padding-left: 10px;
+}
+
 #buttonSearch {
   display: flex;
   border: none;

@@ -4,9 +4,7 @@
   background: rgba(248, 179, 100);
   border-radius: 20px;
   transition: all 0.3s;
-  margin-top: 20px;
-  margin-left: 80px;
-  margin-bottom: 23px;
+  margin: 0px 45px 45px 45px;
   float: left;
   -webkit-text-fill-color: rgb(43, 43, 43);
   -webkit-text-stroke: 0.5px rgb(75, 71, 71);
