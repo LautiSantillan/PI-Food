@@ -8,7 +8,7 @@ export default function NavBar({ paginado }) {
     <div id={styles.header}>
       <div id={styles.divContainer}>
         <img id={styles.img} src={"https://cdn-icons-png.flaticon.com/128/6469/6469203.png"} alt="Recipe" width="50px" height="50px" />
-        <h1 id={styles.h1}>Recipes</h1>
+        <h2 id={styles.h1}>Recipes</h2>
       </div>
       <div id={styles.divButtonCreate}>
         <Link to={"/recipes"}>
