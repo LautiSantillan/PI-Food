@@ -23,7 +23,7 @@ export default function Paginado({ recipesPerPage, allRecipes, currentPage, /* s
   }
 
   return (
-    <nav className={styles.nav}>
+    <div className={styles.nav}>
       <ul>
         {
           pageNumbers?.map((number => {
@@ -31,7 +31,7 @@ export default function Paginado({ recipesPerPage, allRecipes, currentPage, /* s
           }))
         }
       </ul>
-    </nav>
+    </div>
   )
 
 }
