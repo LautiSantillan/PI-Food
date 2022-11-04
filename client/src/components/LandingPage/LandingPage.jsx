@@ -7,7 +7,7 @@ function LandingPage() {
   return (
     <div id={styles.background}>
       <div id={styles.container}>
-        <h1 id={styles.h1}>Welcome to the Food App</h1>
+        <h1 id={styles.h1}>Welcome to my Food App</h1>
       </div>
       <Link to="/home" >
         <button id={styles.button}>Explore</button>

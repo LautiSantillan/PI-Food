@@ -23,28 +23,34 @@
 }
 
 #h3 {
-  margin-top: 15px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 14px;
   margin-left: 1px;
   font-weight: 600;
 }
 
-#label {
+#label1 {
+  display: block;
+  font-weight: 500;
+  margin-left: 5px;
+  margin-bottom: 14px;
+}
+
+#label2 {
+  display: inline-block;
   font-weight: 500;
   margin-left: 5px;
 }
 
 #p {
   display: inline-block;
-  margin: 0.05rem 0.2rem 0.05rem 0.2rem;
   margin-top: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   font-size: smaller;
   padding: 0.1rem 0.4rem;
-  margin-left: 1px;
+  margin-left: 4px;
   border-radius: 15px;
   background-color: rgba(255, 236, 236, 0.8);
-  width: fit-content;
 }
 
 #buttonRecipe {
@@ -94,4 +100,14 @@
 #button2:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
+}
+
+#divContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  column-gap: 10px;
+  font-weight: 500;
+  margin-bottom: 14px;
 }

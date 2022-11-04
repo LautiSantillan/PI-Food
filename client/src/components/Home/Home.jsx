@@ -108,7 +108,7 @@ export default function Home() {
             <option value="whole 30">Whole30</option>
             <option value="dairy free">Dairy Free</option>
           </select>
-          <button id={styles.buttonClear} onClick={handleClick}>Reload</button>
+          <button id={styles.buttonClear} onClick={handleClick}>Refresh</button>
         </div>
 
         <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} currentPage={currentPage} /* setActualPage={setActualPage} */ paginado={paginado} />
@@ -117,7 +117,7 @@ export default function Home() {
           <div id={styles.divCard}>
             {loading ? <Loading /> : actualRecipes?.length > 0 ?
               actualRecipes?.map(recipe =>
-                <Recipe id={recipe.id} name={recipe.name} image={recipe.image} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
+                <Recipe id={recipe.id} image={recipe.image} name={recipe.name} healthScore={recipe.healthScore} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
               : <NotFound />}
           </div>
         </div>

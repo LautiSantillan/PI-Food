@@ -4,7 +4,7 @@ import styles from "../Recipe/Recipe.module.css"
 import { useDispatch } from "react-redux"
 import { deleteRecipe } from "../../actions/index";
 
-export default function Recipe({ id, image, name, diets, created }) {
+export default function Recipe({ id, image, name, healthScore, diets, created }) {
   const dispatch = useDispatch()
 
   const handleDelete = (e) => {
@@ -20,7 +20,11 @@ export default function Recipe({ id, image, name, diets, created }) {
           <div id={styles.cardRecipe}>
             <img src={image} alt="Receta" width="300px" id={styles.image} />
             <h3 id={styles.h3}>{name}</h3>
-            <label id={styles.label}>Diets: </label>
+            <div id={styles.divContainer}>
+              <label>Health Score: <span>{healthScore}</span></label>
+              <img src="https://cdn-icons-png.flaticon.com/128/4331/4331766.png" alt="healthscore" width="20px" />
+            </div>
+            <label id={styles.label2}>Diets: </label>
             {diets?.map((d) => (
               <p id={styles.p} key={d}>
                 {d.charAt(0).toUpperCase() + d.slice(1)}
@@ -36,7 +40,11 @@ export default function Recipe({ id, image, name, diets, created }) {
           <div id={styles.cardRecipe}>
             <img src={image} alt="Receta" width="300px" id={styles.image} />
             <h3 id={styles.h3}>{name}</h3>
-            <label id={styles.label}>Diets: </label>
+            <div id={styles.divContainer}>
+              <label>Health Score: <span>{healthScore}</span></label>
+              <img src="https://cdn-icons-png.flaticon.com/128/4331/4331766.png" alt="healthscore" width="20px" />
+            </div>
+            <label id={styles.label2}>Diets: </label>
             {diets?.map((d) => (
               <p id={styles.p} key={d}>
                 {d.charAt(0).toUpperCase() + d.slice(1)}
