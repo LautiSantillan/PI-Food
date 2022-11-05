@@ -127,9 +127,6 @@ const createDietsDB = async () => {
     const dietTypes = [
       "gluten free",
       "ketogenic",
-      "vegetarian",
-      "lacto vegetarian",
-      "ovo vegetarian",
       "lacto ovo vegetarian",
       "vegan",
       "pescatarian",
