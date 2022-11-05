@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "../Paginado/Paginado.module.css"
+import { setPage } from "../../actions/index";
+import { useDispatch, useSelector } from "react-redux"
 
 
+export default function Paginado() {
+  const dispatch = useDispatch()
+  const recipes = useSelector(state => state.recipes)
+  const recipesPerPage = useSelector(state => state.recipesPerPage)
+  const currentPage = useSelector(state => state.currentPage)
 
-export default function Paginado({ recipesPerPage, allRecipes, currentPage, /* setActualPage */ paginado }) {
-  // const dispatch = useDispatch()
   const pageNumbers = []
+  const allRecipes = recipes?.length
 
   // const handlePaginado = (event, number) => {
   //   event.preventDefault()
@@ -18,6 +24,10 @@ export default function Paginado({ recipesPerPage, allRecipes, currentPage, /* s
   //   setActualPage(number)
   // }
 
+  const handlePaginado = (e) => {
+    dispatch(setPage(parseInt(e.target.innerHTML)))
+  }
+
   for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
     pageNumbers.push(i)
   }
@@ -27,7 +37,7 @@ export default function Paginado({ recipesPerPage, allRecipes, currentPage, /* s
       <ul>
         {
           pageNumbers?.map((number => {
-            return <button className={number === currentPage ? styles.pagActual : styles.pagOther} onClick={() => paginado(number)} /* onClick={(event) => handlePaginado(event, number)} */ key={number}>{number}</button>
+            return <button className={number === currentPage ? styles.pagActual : styles.pagOther} onClick={handlePaginado} key={number}>{number}</button>
           }))
         }
       </ul>

@@ -14,7 +14,6 @@
   align-items: center;
   margin-left: 20px;
   column-gap: 10px;
-  float: left;
 }
 
 #h1 {
@@ -46,4 +45,9 @@
 #buttonCreate:hover {
   background-color: rgb(255, 255, 255);
   color: black;
+}
+
+#link {
+  text-decoration: none;
+  color: inherit;
 }

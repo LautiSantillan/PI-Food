@@ -9,9 +9,10 @@ import {
   ORDER_BY_HEALTHSCORE,
   CLEAR_DETAIL,
   LOADING,
-  SET_PAGE,
   UPDATE_RECIPE,
   DELETE_RECIPE,
+  SET_PAGE,
+  CLEAN_RECIPES,
 } from "../actions/index";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   diets: [],
   recipeDetail: [],
   loading: true,
+  recipesPerPage: 9,
   currentPage: 1,
 };
 
@@ -28,7 +30,6 @@ function rootReducer(state = initialState, action) {
     case GET_RECIPES:
       return {
         ...state,
-        loading: false,
         recipes: action.payload,
         allRecipes: action.payload,
       };
@@ -36,14 +37,13 @@ function rootReducer(state = initialState, action) {
     case GET_RECIPE_BY_NAME:
       return {
         ...state,
-        loading: false,
         recipes: action.payload,
+        currentPage: 1,
       };
 
     case GET_RECIPE_DETAIL:
       return {
         ...state,
-        loading: false,
         recipeDetail: action.payload,
       };
 
@@ -81,6 +81,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipes: dietsFiltered,
+        currentPage: 1,
       };
 
     case ORDER_ALPHABETICAL: {
@@ -100,6 +101,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipes: orderAlphabetical,
+        currentPage: 1,
       };
     }
 
@@ -120,6 +122,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         recipes: orderHealthScore,
+        currentPage: 1,
       };
 
     case CLEAR_DETAIL:
@@ -137,6 +140,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         currentPage: action.payload,
       };
+    case CLEAN_RECIPES: {
+      return {
+        ...state,
+        recipes: [],
+      };
+    }
 
     default:
       return state;

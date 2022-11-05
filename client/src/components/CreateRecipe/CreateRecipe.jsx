@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getDietsTypes, postRecipe } from "../../actions/index"
+import { cleanRecipes, getDietsTypes, getRecipes, postRecipe, setPage } from "../../actions/index"
 import styles from "./CreateRecipe.module.css"
 import NavBarHome from "../NavBarHome/NavBarHome";
 
@@ -127,6 +127,9 @@ export default function CreateRecipe() {
         diets: []
       });
       history.push("/home");
+      dispatch(cleanRecipes())
+      dispatch(getRecipes())
+      dispatch(setPage(1))
     }
   }
 

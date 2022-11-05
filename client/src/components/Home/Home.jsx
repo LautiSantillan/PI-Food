@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore, /* setPage */ } from "../../actions/index";
+import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHealthScore, cleanRecipes, setPage } from "../../actions/index";
 import Recipe from "../Recipe/Recipe"
 import Paginado from "../Paginado/Paginado";
 import styles from "../Home/Home.module.css"
@@ -13,73 +13,52 @@ import NavBar from "../NavBar/NavBar";
 export default function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector((state) => state.recipes)
-  const loading = useSelector(state => state.loading)
   // const [orden, setOrden] = useState("");
 
   //PAGINADO------------------------------------------------------------------
 
-  const [currentPage, setCurrentPage] = useState(1)
-  // const currentPage = useSelector(state => state?.currentPage)
-
-
-  // eslint-disable-next-line
-  const [recipesPerPage, setRecipesPerPage] = useState(9)
+  const currentPage = useSelector(state => state.currentPage)
+  const recipesPerPage = useSelector(state => state.recipesPerPage)
 
   const indexOfLastRecipe = currentPage * recipesPerPage //9
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage //0
 
   const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
-  const paginado = (number) => {
-    // dispatch(setPage(number))
-    setCurrentPage(number)
-  }
-
-
-  // useEffect(() => {
-  //   if (allVideogames.length === 0) {
-  //     dispatch(getVideogames());
-  //   }
-  // }, [dispatch, allVideogames]);
-
   useEffect(() => {
-    dispatch(getRecipes())
-    dispatch(getDietsTypes())
-    // dispatch(setPage(1))
-  }, [dispatch])
+    if (allRecipes?.length === 0) {
+      dispatch(getRecipes())
+      dispatch(getDietsTypes())
+    }
+  }, [dispatch, allRecipes])
 
   const handleClick = (e) => {
     e.preventDefault()
-    dispatch(getRecipes())
+    dispatch(cleanRecipes())
+    dispatch(setPage(1))
   }
 
   const handleFilterDietType = (e) => {
     e.preventDefault()
     dispatch(filterDietType(e.target.value))
-    // dispatch(setPage(1))
-    paginado(1)
   }
 
   const handleOrderAlphabetical = (e) => {
     e.preventDefault()
     dispatch(orderAlphabetical(e.target.value))
-    // dispatch(setPage(1))
-    paginado(1)
     // setOrden(`Ordenado ${e.target.value}`)
   }
 
   const handleHealthScore = (e) => {
     e.preventDefault()
     dispatch(orderByHealthScore(e.target.value))
-    // dispatch(setPage(1))
-    paginado(1)
     // setOrden(`Ordenado ${e.target.value}`)
   }
 
 
   return (
     <div id={styles.Home}>
-      <NavBar paginado={paginado}></NavBar>
+      <NavBar ></NavBar>
       <div>
         <div id={styles.div_Select}>
           <select id={styles.select_Home} name="alphabetical" onChange={(e) => handleOrderAlphabetical(e)} defaultValue="default">
@@ -111,11 +90,11 @@ export default function Home() {
           <button id={styles.buttonClear} onClick={handleClick}>Refresh</button>
         </div>
 
-        <Paginado recipesPerPage={recipesPerPage} allRecipes={allRecipes?.length} currentPage={currentPage} /* setActualPage={setActualPage} */ paginado={paginado} />
+        <Paginado />
 
         <div>
           <div id={styles.divCard}>
-            {loading ? <Loading /> : actualRecipes?.length > 0 ?
+            {actualRecipes?.length < 1 ? <Loading /> : actualRecipes?.length > 0 ?
               actualRecipes?.map(recipe =>
                 <Recipe id={recipe.id} image={recipe.image} name={recipe.name} healthScore={recipe.healthScore} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
               : <NotFound />}

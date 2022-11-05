@@ -10,9 +10,10 @@ export const ORDER_ALPHABETICAL = "ORDER_ALPHABETICAL";
 export const ORDER_BY_HEALTHSCORE = "ORDER_BY_HEALTHSCORE";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const LOADING = "LOADING";
-export const SET_PAGE = "SET_PAGE";
 export const UPDATE_RECIPE = "UPDATE_RECIPE";
 export const DELETE_RECIPE = "DELETE_RECIPE";
+export const SET_PAGE = "SET_PAGE";
+export const CLEAN_RECIPES = "CLEAN_RECIPES";
 
 export function loading() {
   return {
@@ -22,7 +23,6 @@ export function loading() {
 
 export function getRecipes() {
   return async function (dispatch) {
-    dispatch(loading());
     try {
       const allRecipes = await axios.get("/recipes");
       return dispatch({
@@ -68,24 +68,23 @@ export function deleteRecipe(id) {
 //--------------SEARCH BAR-----------------------------
 export function getRecipeByName(name) {
   return async function (dispatch) {
-    dispatch(loading());
     try {
       const recipeName = await axios.get(`/recipes?name=${name}`);
       return dispatch({
         type: GET_RECIPE_BY_NAME,
         payload: recipeName.data,
       });
-    } catch (error) {}
-    return dispatch({
-      type: GET_RECIPE_BY_NAME,
-      payload: [],
-    });
+    } catch (error) {
+      return dispatch({
+        type: GET_RECIPE_BY_NAME,
+        payload: [],
+      });
+    }
   };
 }
 
 export function getRecipeDetail(id) {
   return async function (dispatch) {
-    dispatch(loading());
     try {
       const recipeDetail = await axios.get(`/recipes/${id}`);
       return dispatch({
@@ -160,5 +159,11 @@ export function setPage(payload) {
   return {
     type: SET_PAGE,
     payload,
+  };
+}
+
+export function cleanRecipes() {
+  return {
+    type: CLEAN_RECIPES,
   };
 }
