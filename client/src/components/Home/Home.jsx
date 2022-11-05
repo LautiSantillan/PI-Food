@@ -26,11 +26,12 @@ export default function Home() {
   const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
   useEffect(() => {
-    if (allRecipes?.length === 0) {
+    if (actualRecipes?.length === 0) {
       dispatch(getRecipes())
       dispatch(getDietsTypes())
     }
-  }, [dispatch, allRecipes])
+  }, [dispatch, actualRecipes])
+
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -74,10 +75,8 @@ export default function Home() {
           <select id={styles.select_Home} name="diets" onChange={(e) => handleFilterDietType(e)} defaultValue="default">
             <option value="default" disabled>Select Diet...</option>
             <option value="gluten free">Gluten Free</option>
+            <option value="dairy free">Dairy Free</option>
             <option value="ketogenic">Ketogenic</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="lacto vegetarian">Lacto-Vegetarian</option>
-            <option value="ovo vegetarian">Ovo-Vegetarian</option>
             <option value="lacto ovo vegetarian">Lacto-Ovo-Vegetarian</option>
             <option value="vegan">Vegan</option>
             <option value="pescatarian">Pescatarian</option>
@@ -85,7 +84,6 @@ export default function Home() {
             <option value="primal">Primal</option>
             <option value="fodmap friendly">Foodmap friendly</option>
             <option value="whole 30">Whole30</option>
-            <option value="dairy free">Dairy Free</option>
           </select>
           <button id={styles.buttonClear} onClick={handleClick}>Refresh</button>
         </div>

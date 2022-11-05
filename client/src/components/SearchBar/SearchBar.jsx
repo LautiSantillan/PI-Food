@@ -13,7 +13,7 @@ export default function SearchBar() {
     setName(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     dispatch(getRecipeByName(name))
     setName("")

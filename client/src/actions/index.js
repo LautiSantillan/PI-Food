@@ -154,16 +154,16 @@ export function cleanDetail() {
     payload: [],
   };
 }
+export function cleanRecipes() {
+  return {
+    type: CLEAN_RECIPES,
+    payload: [],
+  };
+}
 
 export function setPage(payload) {
   return {
     type: SET_PAGE,
     payload,
-  };
-}
-
-export function cleanRecipes() {
-  return {
-    type: CLEAN_RECIPES,
   };
 }

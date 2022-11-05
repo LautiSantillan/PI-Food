@@ -143,7 +143,7 @@ function rootReducer(state = initialState, action) {
     case CLEAN_RECIPES: {
       return {
         ...state,
-        recipes: [],
+        recipes: action.payload,
       };
     }
 
