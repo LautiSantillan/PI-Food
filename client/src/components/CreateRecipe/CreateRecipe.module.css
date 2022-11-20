@@ -7,7 +7,7 @@
   height: 100vh;
   background-attachment: fixed;
   overflow: auto;
-  margin: 0%;
+  /* margin: 0%; */
   color: white;
   justify-content: center;
 }
@@ -15,7 +15,7 @@
 #divContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 #form {
@@ -23,17 +23,17 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0% auto;
-  width: 300px;
+  /* margin: 0% auto; */
+  /* width: 300px; */
   padding: 30px;
   color: rgb(43, 43, 43);
-  margin-top: 60px;
-  width: 700px;
+  margin-top: 30px;
+  width: 600px;
   background-color: rgba(248, 179, 100);
   border-radius: 5px;
   border: solid rgb(231, 224, 224) 2px;
   box-shadow: 0 0 4px #000000a8;
-  transition: all 400ms ease;
+  /* transition: all 400ms ease; */
   margin-bottom: 55px;
   max-width: 80%;
 }
@@ -46,24 +46,33 @@
   border-color: rgba(0, 140, 255, 0.66);
   border: 2px;
   margin-bottom: 10px;
-  margin-left: 11px;
+  /* margin-left: 11px; */
 }
 
+
+
 #label {
-  color: white;
+  display: block;
+  color: rgb(255, 254, 254);
+  font-size: medium;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 30px;
+  width: 220px;
+  padding: 3px;
+  /* color: white;
   font-size: medium;
   width: 220px;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 30px;
   display: block;
-  padding: 3px;
+  padding: 3px; */
 }
 
 #selectForm {
   position: relative;
   border: none;
   border-radius: 10px;
-  width: 120px;
+  width: 140px;
   height: 30px;
   overflow: hidden;
   background-color: rgba(255, 236, 236, 0.8);
@@ -142,14 +151,18 @@
 
 #divDiet {
   display: flex;
+  column-gap: 25px;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  flex-wrap: wrap;
+  /* row-gap: 20px; */
 }
 
-#selectDiet {
+/* #selectDiet {
   color: rgb(43, 43, 43);
   margin-left: 20px;
-}
+} */
 
 #buttonDiet {
   width: 30px;
@@ -163,5 +176,5 @@
   outline: none;
   border: none;
   background: rgba(255, 236, 236, 0.8);
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }

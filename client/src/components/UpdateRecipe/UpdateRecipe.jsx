@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { cleanRecipes, getDietsTypes, getRecipes, setPage, updateRecipe } from "../../actions/index"
 import styles from "./UpdateRecipe.module.css"
 import NavBarHome from "../NavBarHome/NavBarHome";
+import swal from "sweetalert";
+
 
 export default function UpdateRecipe() {
   const dispatch = useDispatch()
   const history = useHistory()
   const { id } = useParams()
-  let allRecipes = useSelector(state => state.allRecipes)
+  let allRecipes = useSelector(state => state.recipes)
   const dietsTypes = useSelector(state => state.diets)
 
   const [errors, setErrors] = useState({})
@@ -87,30 +89,32 @@ export default function UpdateRecipe() {
       errors.name = "Enter a correct name";
     } else if (
       allRecipes.find(
-        (e) =>
-          e.name.toLowerCase().trim() === input.name.toLocaleLowerCase().trim()
+        (e) => e.name.toLowerCase().trim().includes(input.name.toLowerCase().trim())
       )
     ) {
       errors.name = `The ${input.name} already exists`;
     } else if (
-      input.summary.length < 40 ||
+      input.summary.length < 10 ||
       input.summary.trim() === ""
     ) {
       errors.summary = "Enter a correct summary";
     } else if (input.healthScore === "" || input.healthScore < 1 || input.healthScore > 100) {
-      errors.healthScore = "Enter a healthScore";
+      errors.healthScore = "Enter a correct health score";
     } else if (input.steps.length === 0) {
       errors.steps = "Enter a correct steps"
     } else if (!input.image || !validateUrl.test(input.image)) {
       errors.image = "This is not a valid URL";
-    }
-    else if (input.diets.length === 0) {
+    } else if (input.diets.length < 1) {
       errors.diets = "Select one or more diets";
+    } else if (input.diets.length > 4) {
+      errors.diets = "Your recipe can not have more than 4 diets!";
     }
-    return errors;
+    let result = Object.keys(errors).length > 0 ? errors : true;
+    return result;
+    // return errors;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(validate(input));
     let error = validate(input);
@@ -118,7 +122,8 @@ export default function UpdateRecipe() {
     if (Object.values(error).length !== 0) {
     } else {
       dispatch(updateRecipe(id, input));
-      alert("The recipe has been modified");
+      await swal("The recipe has been updated", "Recipe updated with success", "success");
+
       setInput({
         name: "",
         summary: "",
@@ -145,31 +150,31 @@ export default function UpdateRecipe() {
           </div>
           <div>
             <label id={styles.label}>Name: </label>
-            <input id={styles.input} type="text" value={input.name} name="name" onChange={(e) => handleChange(e)} />
+            <input id={styles.input} type="text" value={input.name} name="name" onChange={(e) => handleChange(e)} placeholder="Name..." />
             {errors.name && <h4 id={styles.error}>{errors.name}</h4>}
           </div>
+          <label id={styles.label}>Summary: </label>
           <div>
-            <label id={styles.label}>Summary: </label>
-            <textarea id={styles.input} type="text" value={input.summary} name="summary" onChange={(e) => handleChange(e)}></textarea>
+            <textarea id={styles.input} type="text" value={input.summary} name="summary" onChange={(e) => handleChange(e)} placeholder="Summary..."></textarea>
             {errors.summary && <h4 id={styles.error}>{errors.summary}</h4>}
           </div>
           <div>
             <label id={styles.label}>Health Score: </label>
-            <input id={styles.input} type="number" value={input.healthScore} name="healthScore" onChange={(e) => handleChange(e)} />
+            <input id={styles.input} type="number" value={input.healthScore} name="healthScore" onChange={(e) => handleChange(e)} placeholder="Between 1 and 100..." />
             {errors.healthScore && <h4 id={styles.error}>{errors.healthScore}</h4>}
           </div>
+          <label id={styles.label}>Steps: </label>
           <div>
-            <label id={styles.label}>Steps: </label>
-            <textarea id={styles.input} type="text" value={input.steps.step} name="steps" onChange={(e) => handleSteps(e)}></textarea>
+            <textarea id={styles.input} type="text" value={input.steps.step} name="steps" onChange={(e) => handleSteps(e)} placeholder="Steps..."></textarea>
             {errors.steps && <h4 id={styles.error}>{errors.steps}</h4>}
           </div>
           <div>
             <label id={styles.label} >Image: </label>
-            <input id={styles.input} type="text" value={input.image} name="image" onChange={(e) => handleChange(e)}></input>
+            <input id={styles.input} type="text" value={input.image} name="image" onChange={(e) => handleChange(e)} placeholder="Enter a url..."></input>
             {errors.image && <h4 id={styles.error}>{errors.image}</h4>}
           </div>
+          <label id={styles.label}>Diets: </label>
           <div>
-            <label id={styles.label}>Diets: </label>
             <select id={styles.selectForm} onChange={(e) => handleSelect(e)} defaultValue="default">
               <option disabled value="default" > Select diets...</option>
               {dietsTypes?.map((d) => (

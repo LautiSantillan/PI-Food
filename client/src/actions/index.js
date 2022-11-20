@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 
 export const GET_RECIPES = "GET_RECIPES";
 export const GET_RECIPE_BY_NAME = "GET_RECIPE_BY_NAME";
@@ -75,10 +76,8 @@ export function getRecipeByName(name) {
         payload: recipeName.data,
       });
     } catch (error) {
-      return dispatch({
-        type: GET_RECIPE_BY_NAME,
-        payload: [],
-      });
+      swal("Recipe Not Found", "The recipe does not exist", "error");
+      console.log(error);
     }
   };
 }

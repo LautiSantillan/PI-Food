@@ -26,7 +26,7 @@ export default function Home() {
   const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
   useEffect(() => {
-    if (actualRecipes?.length === 0) {
+    if (actualRecipes.length === 0) {
       dispatch(getRecipes())
       dispatch(getDietsTypes())
     }
@@ -85,14 +85,14 @@ export default function Home() {
             <option value="fodmap friendly">Foodmap friendly</option>
             <option value="whole 30">Whole30</option>
           </select>
-          <button id={styles.buttonClear} onClick={handleClick}>Refresh</button>
+          <button id={styles.buttonClear} onClick={handleClick}>Reload</button>
         </div>
 
         <Paginado />
 
         <div>
           <div id={styles.divCard}>
-            {actualRecipes?.length < 1 ? <Loading /> : actualRecipes?.length > 0 ?
+            {actualRecipes.length < 1 ? <Loading /> : actualRecipes.length > 0 ?
               actualRecipes?.map(recipe =>
                 <Recipe id={recipe.id} image={recipe.image} name={recipe.name} healthScore={recipe.healthScore} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
               : <NotFound />}

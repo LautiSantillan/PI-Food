@@ -30,9 +30,10 @@ export default function Recipe({ id, image, name, healthScore, diets, created })
                 {d.charAt(0).toUpperCase() + d.slice(1)}
               </p>
             ))}
-            <br /><br />
-            <Link to={`/updaterecipe/${id}`}><button id={styles.button1}>Modify</button></Link>
-            <button id={styles.button2} onClick={(e) => handleDelete(e)}>Delete</button>
+            <div id={styles.divButtons}>
+              <Link to={`/updaterecipe/${id}`}><button id={styles.button1}>Modify</button></Link>
+              <button id={styles.button2} onClick={(e) => handleDelete(e)}>Delete</button>
+            </div>
           </div>
         </Link>
         :
