@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
       let recipeName = info.filter((r) =>
         r.name.toLowerCase().includes(name.toLowerCase())
       );
-      recipeName.length
+      recipeName
         ? res.status(200).send(recipeName)
         : res.status(404).send("Recipe not found");
     } else {
