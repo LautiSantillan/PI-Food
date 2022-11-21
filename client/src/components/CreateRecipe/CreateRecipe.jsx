@@ -68,18 +68,18 @@ export default function CreateRecipe() {
     });
   };
 
-  const handleSteps = (e) => {
-    setInput({
-      ...input,
-      steps: [{ step: e.target.value }]
-    })
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-  }
+  // const handleSteps = (e) => {
+  //   setInput({
+  //     ...input,
+  //     steps: [{ step: e.target.value }]
+  //   })
+  //   setErrors(
+  //     validate({
+  //       ...input,
+  //       [e.target.name]: e.target.value,
+  //     })
+  //   );
+  // }
 
   const handleChangeInstruction = (e) => {
     const value = e.target.value;
