@@ -5,14 +5,14 @@ import { getRecipes, getDietsTypes, filterDietType, orderAlphabetical, orderByHe
 import Recipe from "../Recipe/Recipe"
 import Paginado from "../Paginado/Paginado";
 import styles from "../Home/Home.module.css"
-import NotFound from "../NotFound/NotFound";
+// import NotFound from "../NotFound/NotFound";
 import Loading from "../Loading/Loading";
 import NavBar from "../NavBar/NavBar";
 
 
 export default function Home() {
   const dispatch = useDispatch()
-  const allRecipes = useSelector((state) => state.recipes)
+  const allRecipes = useSelector((state) => state?.recipes)
   // const [orden, setOrden] = useState("");
 
   //PAGINADO------------------------------------------------------------------
@@ -26,7 +26,7 @@ export default function Home() {
   const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
   useEffect(() => {
-    if (actualRecipes?.length === 0) {
+    if (actualRecipes.length === 0) {
       dispatch(getRecipes())
       dispatch(getDietsTypes())
     }
@@ -90,12 +90,21 @@ export default function Home() {
 
         <Paginado />
 
-        <div>
+        {/* <div>
           <div id={styles.divCard}>
             {actualRecipes?.length < 1 ? <Loading /> : actualRecipes?.length > 0 ?
               actualRecipes?.map(recipe =>
                 <Recipe id={recipe.id} image={recipe.image} name={recipe.name} healthScore={recipe.healthScore} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
               : <NotFound />}
+          </div>
+        </div> */}
+
+        <div>
+          <div id={styles.divCard}>
+            {actualRecipes?.length < 1 ? <Loading />
+              : actualRecipes?.map(recipe =>
+                <Recipe id={recipe.id} image={recipe.image} name={recipe.name} healthScore={recipe.healthScore} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
+            }
           </div>
         </div>
 
