@@ -26,7 +26,7 @@ export default function Home() {
   const actualRecipes = allRecipes?.slice(indexOfFirstRecipe, indexOfLastRecipe)
 
   useEffect(() => {
-    if (actualRecipes.length === 0) {
+    if (actualRecipes?.length === 0) {
       dispatch(getRecipes())
       dispatch(getDietsTypes())
     }
@@ -92,7 +92,7 @@ export default function Home() {
 
         <div>
           <div id={styles.divCard}>
-            {actualRecipes.length < 1 ? <Loading /> : actualRecipes.length > 0 ?
+            {actualRecipes?.length < 1 ? <Loading /> : actualRecipes?.length > 0 ?
               actualRecipes?.map(recipe =>
                 <Recipe id={recipe.id} image={recipe.image} name={recipe.name} healthScore={recipe.healthScore} diets={recipe.diets} created={recipe.created} key={recipe.id} />)
               : <NotFound />}

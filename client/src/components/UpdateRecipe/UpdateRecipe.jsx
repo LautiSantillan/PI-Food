@@ -6,6 +6,7 @@ import { cleanRecipes, getDietsTypes, getRecipes, setPage, updateRecipe } from "
 import styles from "./UpdateRecipe.module.css"
 import NavBarHome from "../NavBarHome/NavBarHome";
 import swal from "sweetalert";
+var number = 0
 
 
 export default function UpdateRecipe() {
@@ -14,6 +15,8 @@ export default function UpdateRecipe() {
   const { id } = useParams()
   let allRecipes = useSelector(state => state.recipes)
   const dietsTypes = useSelector(state => state.diets)
+
+  const [instruction, setInstruction] = useState("");
 
   const [errors, setErrors] = useState({})
 
@@ -65,18 +68,33 @@ export default function UpdateRecipe() {
     });
   };
 
-  const handleSteps = (e) => {
+  const handleChangeInstruction = (e) => {
+    const value = e.target.value;
+    setInstruction(value);
+  };
+
+  const handleAddInstruction = (e) => {
+    if (instruction) {
+      setInput({
+        ...input,
+        steps: [...input.steps, { num: number++, step: `Step ${number}: ${instruction}` }],
+      });
+      setErrors(
+        validate({
+          ...input,
+          [e.target.name]: e.target.value,
+        })
+      );
+      setInstruction("");
+    }
+  };
+
+  const handleDeleteSteps = (e) => {
     setInput({
       ...input,
-      steps: [{ step: e.target.value }]
-    })
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-  }
+      steps: input.steps.filter((el) => el !== e),
+    });
+  };
 
 
   let validateUrl = /(http(s?):)([/|.|\w|\s|-])*.(?:jpg|gif|png)/;
@@ -88,9 +106,7 @@ export default function UpdateRecipe() {
     if (!input.name.trim()) {
       errors.name = "Enter a correct name";
     } else if (
-      allRecipes.find(
-        (e) => e.name.toLowerCase().trim().includes(input.name.toLowerCase().trim())
-      )
+      allRecipes.find((e) => e.name.toLowerCase().trim().includes(input.name.toLowerCase().trim()))
     ) {
       errors.name = `The ${input.name} already exists`;
     } else if (
@@ -123,7 +139,6 @@ export default function UpdateRecipe() {
     } else {
       dispatch(updateRecipe(id, input));
       await swal("The recipe has been updated", "Recipe updated with success", "success");
-
       setInput({
         name: "",
         summary: "",
@@ -165,11 +180,25 @@ export default function UpdateRecipe() {
           </div>
           <label id={styles.label}>Steps: </label>
           <div>
-            <textarea id={styles.input} type="text" value={input.steps.step} name="steps" onChange={(e) => handleSteps(e)} placeholder="Steps..."></textarea>
+            <textarea id={styles.inputButtonAdd} type="text" value={input.steps.step} name="steps" onChange={handleChangeInstruction}
+              maxLength={80} placeholder="Add step..."></textarea>
+            <div>
+              <button id={styles.buttonAdd} type='button' onClick={handleAddInstruction}>
+                Add step
+              </button>
+            </div>
+            <div>
+              {input.steps.map((el, idx) => {
+                return <div>
+                  <p id={styles.p} key={idx}>{`${el.step}`}</p>
+                  <button id={styles.buttonDiet} value={el} onClick={() => handleDeleteSteps(el)}>x</button>
+                </div>
+              })}
+            </div>
             {errors.steps && <h4 id={styles.error}>{errors.steps}</h4>}
           </div>
           <div>
-            <label id={styles.label} >Image: </label>
+            <label id={styles.labelImage}>Image: </label>
             <input id={styles.input} type="text" value={input.image} name="image" onChange={(e) => handleChange(e)} placeholder="Enter a url..."></input>
             {errors.image && <h4 id={styles.error}>{errors.image}</h4>}
           </div>
@@ -197,3 +226,4 @@ export default function UpdateRecipe() {
     </div>
   )
 }
+
