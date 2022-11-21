@@ -71,10 +71,12 @@ export function getRecipeByName(name) {
   return async function (dispatch) {
     try {
       const recipeName = await axios.get(`/recipes?name=${name}`);
-      dispatch({
-        type: GET_RECIPE_BY_NAME,
-        payload: recipeName.data,
-      });
+      recipeName.length
+        ? dispatch({
+            type: GET_RECIPE_BY_NAME,
+            payload: recipeName.data,
+          })
+        : await swal("Recipe Not Found", "The recipe does not exist", "error");
     } catch (error) {
       await swal("Recipe Not Found", "The recipe does not exist", "error");
       console.log(error);
