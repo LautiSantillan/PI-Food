@@ -71,7 +71,7 @@ export function getRecipeByName(name) {
   return async function (dispatch) {
     try {
       const recipeName = await axios.get(`/recipes?name=${name}`);
-      recipeName.length
+      recipeName
         ? dispatch({
             type: GET_RECIPE_BY_NAME,
             payload: recipeName.data,

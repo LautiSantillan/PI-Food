@@ -89,14 +89,6 @@ export default function CreateRecipe() {
     }
   };
 
-  const handleDeleteSteps = (e) => {
-    setInput({
-      ...input,
-      steps: input.steps.filter((el) => el !== e),
-    });
-  };
-
-
   let validateUrl = /(http(s?):)([/|.|\w|\s|-])*.(?:jpg|gif|png)/;
 
 
@@ -191,7 +183,6 @@ export default function CreateRecipe() {
               {input.steps.map((el, idx) => {
                 return <div>
                   <p id={styles.p} key={idx}>{`${el.step}`}</p>
-                  <button id={styles.buttonDiet} value={el} onClick={() => handleDeleteSteps(el)}>x</button>
                 </div>
               })}
             </div>
